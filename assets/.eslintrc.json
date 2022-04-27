@@ -17,12 +17,11 @@
   ],
   "rules": {
     "prettier/prettier": "error",
-    "no-unused-vars": "off"
-    // [
-    //   "error", {
-    //     "argsIgnorePattern": "^_"
-    //   }
-    // ]
+    "no-unused-vars": [
+      "error", {
+        "argsIgnorePattern": "^_"
+      }
+    ]
   },
   "ignorePatterns": [
     "/vendor/topbar.js"
