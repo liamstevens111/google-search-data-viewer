@@ -17,7 +17,10 @@ defmodule GoogleSearchDataViewerWeb.Router do
 
   # coveralls-ignore-stop
 
-  forward Application.get_env(:google_search_data_viewer, GoogleSearchDataViewerWeb.Endpoint)[:health_path], GoogleSearchDataViewerWeb.HealthPlug
+  forward Application.get_env(:google_search_data_viewer, GoogleSearchDataViewerWeb.Endpoint)[
+            :health_path
+          ],
+          GoogleSearchDataViewerWeb.HealthPlug
 
   scope "/", GoogleSearchDataViewerWeb do
     pipe_through :browser

@@ -80,7 +80,7 @@ defmodule GoogleSearchDataViewer.MixProject do
     [
       prettier: "cmd ./assets/node_modules/.bin/prettier --check . --color",
       "prettier.fix": "cmd ./assets/node_modules/.bin/prettier --write . --color",
-  "gettext.extract-and-merge": ["gettext.extract --merge --no-fuzzy"],
+      "gettext.extract-and-merge": ["gettext.extract --merge --no-fuzzy"],
       "ecto.migrate_all": [
         "ecto.migrate --migrations-path=priv/repo/migrations --migrations-path=priv/repo/data_migrations"
       ],
