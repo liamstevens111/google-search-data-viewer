@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  build:
+    build:
+      context: .
+      cache_from:
+        - google_search_data_viewer-build
+      target: build
+    image: google_search_data_viewer-build
+
+  app:
+    build:
+      context: .
+      cache_from:
+        - google_search_data_viewer-build
+        - google_search_data_viewer
+      target: app
+    image: google_search_data_viewer
