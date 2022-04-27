@@ -10,17 +10,17 @@ defmodule GoogleSearchDataViewerWeb.HealthPlug do
 
   @liveness_path ["liveness"]
   @readiness_path ["readiness"]
-  
+
   @impl true
   def init(opts), do: opts
-  
+
   @impl true
   def call(%{path_info: @liveness_path} = conn, _opts) do
     conn
     |> resp(:ok, "alive")
     |> halt()
   end
-  
+
   @impl true
   def call(%{path_info: @readiness_path} = conn, _opts) do
     case readiness_check() do
