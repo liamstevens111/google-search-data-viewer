@@ -33,7 +33,7 @@ defmodule GoogleSearchDataViewerWeb.Router do
     get "/", PageController, :index
 
     resources "/users", UserController, only: [:create, :new]
-    resources "/sessions", SessionController, only: [:new, :create]
+    resources "/sessions", SessionController, only: [:create, :new, :delete]
   end
 
   # Other scopes may use custom stacks.

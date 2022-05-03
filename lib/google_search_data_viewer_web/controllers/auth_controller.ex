@@ -10,4 +10,10 @@ defmodule GoogleSearchDataViewerWeb.AuthController do
     |> put_session(:user_id, user.id)
     |> configure_session(renew: true)
   end
+
+  def sign_out(conn) do
+    conn
+    |> clear_session()
+    |> configure_session(drop: true)
+  end
 end
