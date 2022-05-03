@@ -13,7 +13,6 @@ defmodule GoogleSearchDataViewerWeb.UserControllerTest do
 
   describe "create user" do
     test "redirects to show when data is valid", %{conn: conn} do
-      IO.puts("test")
       conn = post(conn, Routes.user_path(conn, :create), user: @create_attrs)
 
       assert redirected_to(conn) == Routes.page_path(conn, :index)

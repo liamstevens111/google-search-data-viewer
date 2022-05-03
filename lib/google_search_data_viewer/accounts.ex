@@ -38,6 +38,15 @@ defmodule GoogleSearchDataViewer.Accounts do
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
+    Gets a single user.
+  """
+  def get_user(id), do: Repo.get(User, id)
+
+  def get_user_by(params) do
+    Repo.get_by(User, params)
+  end
+
+  @doc """
   Creates a user.
 
   ## Examples
@@ -82,5 +91,21 @@ defmodule GoogleSearchDataViewer.Accounts do
   """
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
+  end
+
+  def validate_email_and_password(email, password) do
+    user = get_user_by(email: email)
+
+    cond do
+      user && Bcrypt.verify_pass(password, user.password_hash) ->
+        {:ok, user}
+
+      user ->
+        {:error, :unauthorized}
+
+      true ->
+        Bcrypt.no_user_verify()
+        {:error, :not_found}
+    end
   end
 end

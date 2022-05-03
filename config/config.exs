@@ -14,6 +14,7 @@ config :google_search_data_viewer,
 config :google_search_data_viewer, GoogleSearchDataViewerWeb.Endpoint,
   health_path: "/_health",
   url: [host: "localhost"],
+  secret_key_base: "rg5JGFGUJ5654erjfei45ereKIHUHJI5",
   render_errors: [view: GoogleSearchDataViewerWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: GoogleSearchDataViewer.PubSub,
   live_view: [signing_salt: "D/5orNhi"]

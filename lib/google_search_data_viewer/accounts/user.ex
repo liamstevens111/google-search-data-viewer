@@ -26,8 +26,8 @@ defmodule GoogleSearchDataViewer.Accounts.User do
           :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
         ) :: Ecto.Changeset.t()
   @doc false
-  def register_changeset(changeset, attrs) do
-    changeset
+  def register_changeset(user, attrs) do
+    user
     |> cast(attrs, [:email, :password])
     |> validate_required([:email, :password])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
@@ -36,10 +36,10 @@ defmodule GoogleSearchDataViewer.Accounts.User do
     |> hash_password(attrs)
   end
 
-  defp hash_password(changeset, _attrs) do
-    password = get_change(changeset, :password)
+  defp hash_password(user, _attrs) do
+    password = get_change(user, :password)
 
-    changeset
+    user
     |> put_change(:hashed_password, Bcrypt.hash_pwd_salt(password))
     |> delete_change(:password)
   end

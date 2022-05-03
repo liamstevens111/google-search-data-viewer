@@ -10,6 +10,10 @@ defmodule GoogleSearchDataViewerWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :authorized do
+    plug GoogleSearchDataViewerWeb.AuthenticationPlug
+  end
+
   # coveralls-ignore-start
   pipeline :api do
     plug :accepts, ["json"]
@@ -27,7 +31,7 @@ defmodule GoogleSearchDataViewerWeb.Router do
 
     get "/", PageController, :index
 
-    resources "/users", UserController
+    resources "/users", UserController, only: [:create, :new]
   end
 
   # Other scopes may use custom stacks.
