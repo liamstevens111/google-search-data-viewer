@@ -97,7 +97,7 @@ defmodule GoogleSearchDataViewer.Accounts do
     user = get_user_by(email: email)
 
     cond do
-      user && Bcrypt.verify_pass(password, user.password_hash) ->
+      user && Bcrypt.verify_pass(password, user.hashed_password) ->
         {:ok, user}
 
       user ->

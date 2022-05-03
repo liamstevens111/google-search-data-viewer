@@ -1,0 +1,14 @@
+<.form let={f} for={@conn} action={@action}>
+  <%= label f, :email %>
+  <%= email_input f, :email %>
+  <%= error_tag f, :email %>
+
+  <%= label f, :password %>
+  <%= password_input f, :password, required: true %>
+  <%= error_tag f, :password %>
+
+  <div>
+    <%= submit "Sign in" %>
+  </div>
+</.form>
+
