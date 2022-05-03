@@ -8,10 +8,11 @@ defmodule GoogleSearchDataViewerWeb.Router do
     plug :put_root_layout, {GoogleSearchDataViewerWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug GoogleSearchDataViewerWeb.PutCurrentUserPlug
   end
 
   pipeline :authorized do
-    plug GoogleSearchDataViewerWeb.AuthenticationPlug
+    plug GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug
   end
 
   # coveralls-ignore-start

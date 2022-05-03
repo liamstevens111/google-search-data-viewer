@@ -3,6 +3,5 @@ defmodule GoogleSearchDataViewer.Repo.Migrations.AddUniqueEmailIndex do
 
   def change do
     create unique_index(:users, [:email])
-
   end
 end

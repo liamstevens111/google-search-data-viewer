@@ -7,7 +7,7 @@ defmodule GoogleSearchDataViewerWeb.UserControllerTest do
   describe "new user" do
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :new))
-      assert html_response(conn, 200) =~ "New User"
+      assert html_response(conn, 200) =~ "Sign up"
     end
   end
 

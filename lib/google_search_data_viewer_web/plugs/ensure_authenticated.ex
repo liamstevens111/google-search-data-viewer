@@ -1,4 +1,4 @@
-defmodule GoogleSearchDataViewerWeb.AuthenticationPlug do
+defmodule GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug do
   import Plug.Conn
   import Phoenix.Controller
 
@@ -13,8 +13,6 @@ defmodule GoogleSearchDataViewerWeb.AuthenticationPlug do
 
     if user do
       conn
-      |> assign(:current_user, user)
-      |> assign(:user_id, user_id)
     else
       conn
       |> assign(:current_user, nil)
