@@ -11,11 +11,11 @@ defmodule GoogleSearchDataViewerWeb.Router do
     plug GoogleSearchDataViewerWeb.PutCurrentUserPlug
   end
 
+  # coveralls-ignore-start
   pipeline :authorized do
     plug GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug
   end
 
-  # coveralls-ignore-start
   pipeline :api do
     plug :accepts, ["json"]
   end

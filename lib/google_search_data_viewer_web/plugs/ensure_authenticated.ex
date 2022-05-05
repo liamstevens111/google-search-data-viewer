@@ -1,3 +1,4 @@
+# coveralls-ignore-start
 defmodule GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug do
   import Plug.Conn
   import Phoenix.Controller
@@ -22,3 +23,5 @@ defmodule GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug do
     end
   end
 end
+
+# coveralls-ignore-stop
