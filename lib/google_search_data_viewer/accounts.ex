@@ -42,8 +42,11 @@ defmodule GoogleSearchDataViewer.Accounts do
   """
   def get_user(id), do: Repo.get(User, id)
 
-  def get_user_by(params) do
-    Repo.get_by(User, params)
+  @doc """
+    Gets a singer user by email
+  """
+  def get_user_by_email(email) do
+    Repo.get_by(User, email: email)
   end
 
   @doc """
@@ -65,22 +68,6 @@ defmodule GoogleSearchDataViewer.Accounts do
   end
 
   @doc """
-  Deletes a user.
-
-  ## Examples
-
-      iex> delete_user(user)
-      {:ok, %User{}}
-
-      iex> delete_user(user)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_user(%User{} = user) do
-    Repo.delete(user)
-  end
-
-  @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 
   ## Examples
@@ -94,7 +81,7 @@ defmodule GoogleSearchDataViewer.Accounts do
   end
 
   def validate_email_and_password(email, password) do
-    user = get_user_by(email: email)
+    user = get_user_by_email(email)
 
     cond do
       user && Bcrypt.verify_pass(password, user.hashed_password) ->
