@@ -23,6 +23,7 @@ defmodule GoogleSearchDataViewerWeb.SessionController do
   def delete(conn, _params) do
     conn
     |> GoogleSearchDataViewerWeb.AuthController.sign_out()
+    |> put_flash(:info, "You have signed out")
     |> redirect(to: Routes.page_path(conn, :index))
   end
 end
