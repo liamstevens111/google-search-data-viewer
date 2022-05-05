@@ -7,12 +7,16 @@ defmodule GoogleSearchDataViewer.AccountsFixtures do
   @doc """
   Generate a user.
   """
+
+  @valid_email "test@gmail.com"
+  @valid_password "aValidPasswordEntered"
+
   def user_fixture(attrs \\ %{}) do
     {:ok, user} =
       attrs
       |> Enum.into(%{
-        email: "test@gmail.com",
-        password: "aValidPasswordEntered"
+        email: @valid_email,
+        password: @valid_password
       })
       |> GoogleSearchDataViewer.Accounts.create_user()
 
