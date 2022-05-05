@@ -10,9 +10,8 @@ defmodule GoogleSearchDataViewerWeb.AuthController do
     |> configure_session(renew: true)
   end
 
+  @spec sign_out(Plug.Conn.t()) :: Plug.Conn.t()
   def sign_out(conn) do
-    conn
-    |> clear_session()
-    |> configure_session(drop: true)
+    delete_session(conn, :user_id)
   end
 end
