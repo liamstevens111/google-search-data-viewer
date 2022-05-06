@@ -1,26 +1,27 @@
 defmodule GoogleSearchDataViewerWeb.UserControllerTest do
   use GoogleSearchDataViewerWeb.ConnCase
 
-  @create_attrs %{email: "some@email", password: "somepassword"}
+  @valid_attrs %{email: "some@email", password: "somepassword"}
   @invalid_attrs %{email: "someinvalidemail", password: "somepass"}
 
-  describe "new user" do
-    test "renders form", %{conn: conn} do
+  describe "GET /users/new" do
+    test "renders sign up page", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :new))
       assert html_response(conn, 200) =~ "Sign up"
     end
   end
 
-  describe "create user" do
-    test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.user_path(conn, :create), user: @create_attrs)
+  describe "POST /users" do
+    test "given a valid email and password, redirects to home page and shows flash", %{conn: conn} do
+      conn = post(conn, Routes.user_path(conn, :create), user: @valid_attrs)
 
       assert redirected_to(conn) == Routes.page_path(conn, :index)
+      assert get_flash(conn, :info) =~ "User created successfully"
     end
 
-    test "renders errors when data is invalid", %{conn: conn} do
+    test "given an invalid email and pasword, renders an error", %{conn: conn} do
       conn = post(conn, Routes.user_path(conn, :create), user: @invalid_attrs)
-      assert html_response(conn, 200)
+      assert html_response(conn, 200) =~ "something went wrong"
     end
   end
 end

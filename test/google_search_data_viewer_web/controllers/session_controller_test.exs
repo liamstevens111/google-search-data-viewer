@@ -3,8 +3,15 @@ defmodule GoogleSearchDataViewerWeb.SessionControllerTest do
 
   @valid_attrs %{email: "test@gmail.com", password: "aValidPasswordEntered"}
 
-  describe "POST create/2" do
-    test "signs a user in given correct email and password", %{conn: conn} do
+  describe "GET /sessions/new" do
+    test "renders sign in page", %{conn: conn} do
+      conn = get(conn, Routes.session_path(conn, :new))
+      assert html_response(conn, 200) =~ "Sign in"
+    end
+  end
+
+  describe "POST /sessions" do
+    test "given a pre-existing email and password, signs a user in", %{conn: conn} do
       insert(:user, email: @valid_attrs[:email], password: @valid_attrs[:password])
 
       conn =
@@ -17,7 +24,7 @@ defmodule GoogleSearchDataViewerWeb.SessionControllerTest do
       assert redirected_to(conn, 302) =~ "/"
     end
 
-    test "failed user sign in given incorrect email and password", %{conn: conn} do
+    test "given a non-existing email and password, fail to sign the user in", %{conn: conn} do
       insert(:user, email: @valid_attrs[:email], password: @valid_attrs[:password])
 
       conn =
@@ -31,8 +38,8 @@ defmodule GoogleSearchDataViewerWeb.SessionControllerTest do
     end
   end
 
-  describe "DELETE create/2" do
-    test "when user is signed in, signs a user out", %{conn: conn} do
+  describe "DELETE /sessions/:id" do
+    test "when a user is signed in, sign the user out", %{conn: conn} do
       user = insert(:user, email: @valid_attrs[:email], password: @valid_attrs[:password])
 
       conn =
