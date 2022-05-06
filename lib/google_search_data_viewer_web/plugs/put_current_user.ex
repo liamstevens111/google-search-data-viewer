@@ -8,10 +8,6 @@ defmodule GoogleSearchDataViewerWeb.PutCurrentUserPlug do
 
     user = user_id && GoogleSearchDataViewer.Accounts.get_user(user_id)
 
-    if user do
-      assign(conn, :current_user, user)
-    else
-      assign(conn, :current_user, nil)
-    end
+    assign(conn, :current_user, user)
   end
 end

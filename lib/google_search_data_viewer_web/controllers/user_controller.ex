@@ -3,7 +3,6 @@ defmodule GoogleSearchDataViewerWeb.UserController do
 
   alias GoogleSearchDataViewer.Accounts
   alias GoogleSearchDataViewer.Accounts.User
-
   alias GoogleSearchDataViewerWeb.AuthController
 
   def new(conn, _params) do
