@@ -22,7 +22,7 @@ config :google_search_data_viewer, GoogleSearchDataViewerWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "IiuFUPO6or8URIuCNwmBCb7iex7ZHXGj18zwDq9u9HaYT8TOjOsCMcvHx43pVgWU",
+  secret_key_base: "SActK/gZplr6QUPMRzVwcredt+1z4qXSGUwPRzDHmCtwbaVSXq3MOc3s6In1mX34",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
