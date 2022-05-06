@@ -6,7 +6,7 @@
   <% end %>
 
   <%= label f, :email %>
-  <%= email_input f, :email %>
+  <%= email_input f, :email, required: true %>
   <%= error_tag f, :email %>
 
   <%= label f, :password %>

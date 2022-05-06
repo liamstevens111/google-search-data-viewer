@@ -1,6 +1,6 @@
 <.form let={f} for={@conn} action={@action}>
   <%= label f, :email %>
-  <%= email_input f, :email %>
+  <%= email_input f, :email, required: true %>
   <%= error_tag f, :email %>
 
   <%= label f, :password %>
