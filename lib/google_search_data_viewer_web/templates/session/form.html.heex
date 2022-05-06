@@ -1,4 +1,4 @@
-<.form let={f} for={@conn} action={@action}>
+<.form id="login-form" let={f} for={@conn} action={@action}>
   <%= label f, :email %>
   <%= email_input f, :email, required: true %>
   <%= error_tag f, :email %>
