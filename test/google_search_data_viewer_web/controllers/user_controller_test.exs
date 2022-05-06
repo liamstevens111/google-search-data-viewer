@@ -7,6 +7,7 @@ defmodule GoogleSearchDataViewerWeb.UserControllerTest do
   describe "GET /users/new" do
     test "renders sign up page", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :new))
+
       assert html_response(conn, 200) =~ "Sign up"
     end
   end
@@ -21,6 +22,7 @@ defmodule GoogleSearchDataViewerWeb.UserControllerTest do
 
     test "given an invalid email and pasword, renders an error", %{conn: conn} do
       conn = post(conn, Routes.user_path(conn, :create), user: @invalid_attrs)
+
       assert html_response(conn, 200) =~ "something went wrong"
     end
   end

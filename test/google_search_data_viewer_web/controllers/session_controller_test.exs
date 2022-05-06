@@ -6,6 +6,7 @@ defmodule GoogleSearchDataViewerWeb.SessionControllerTest do
   describe "GET /sessions/new" do
     test "renders sign in page", %{conn: conn} do
       conn = get(conn, Routes.session_path(conn, :new))
+
       assert html_response(conn, 200) =~ "Sign in"
     end
   end

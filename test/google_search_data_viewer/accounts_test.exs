@@ -10,6 +10,7 @@ defmodule GoogleSearchDataViewer.AccountsTest do
   describe "list_users/0" do
     test "returns all users" do
       user = insert(:user)
+
       assert Accounts.list_users() == [user]
     end
   end
@@ -17,6 +18,7 @@ defmodule GoogleSearchDataViewer.AccountsTest do
   describe "get_user!/1" do
     test "given a valid id, returns the existing user with the given id or returns an error if doesn't exist" do
       user = insert(:user)
+
       assert Accounts.get_user!(user.id) == user
     end
   end
@@ -24,6 +26,7 @@ defmodule GoogleSearchDataViewer.AccountsTest do
   describe "get_user/1" do
     test "given an id, returns the existing user with the given id" do
       user = insert(:user)
+
       assert Accounts.get_user(user.id) == user
     end
   end
@@ -31,6 +34,7 @@ defmodule GoogleSearchDataViewer.AccountsTest do
   describe "get_user_by_email/1" do
     test "given an email, returns the existing user with the given email" do
       user = insert(:user)
+
       assert Accounts.get_user_by_email(user.email) == user
     end
   end
@@ -72,6 +76,7 @@ defmodule GoogleSearchDataViewer.AccountsTest do
   describe "change_user/1" do
     test "given a user, returns a user changeset" do
       user = insert(:user)
+
       assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
   end
