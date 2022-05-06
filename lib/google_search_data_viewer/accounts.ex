@@ -4,9 +4,9 @@ defmodule GoogleSearchDataViewer.Accounts do
   """
 
   import Ecto.Query, warn: false
-  alias GoogleSearchDataViewer.Repo
-
+  alias GoogleSearchDataViewer.Accounts.Passwords
   alias GoogleSearchDataViewer.Accounts.User
+  alias GoogleSearchDataViewer.Repo
 
   @doc """
   Returns the list of users.
@@ -84,7 +84,7 @@ defmodule GoogleSearchDataViewer.Accounts do
     user = get_user_by_email(email)
 
     cond do
-      user && Bcrypt.verify_pass(password, user.hashed_password) ->
+      user && Passwords.verify_password(password, user.hashed_password) ->
         {:ok, user}
 
       user ->

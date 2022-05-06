@@ -2,6 +2,8 @@ defmodule GoogleSearchDataViewer.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias GoogleSearchDataViewer.Accounts.Passwords
+
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true
@@ -41,7 +43,7 @@ defmodule GoogleSearchDataViewer.Accounts.User do
     password = get_change(user, :password)
 
     user
-    |> put_change(:hashed_password, Bcrypt.hash_pwd_salt(password))
+    |> put_change(:hashed_password, Passwords.hash_password(password))
     |> delete_change(:password)
   end
 end
