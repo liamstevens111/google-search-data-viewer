@@ -2,7 +2,6 @@ defmodule GoogleSearchDataViewer.AccountsTest do
   use GoogleSearchDataViewer.DataCase
 
   alias GoogleSearchDataViewer.Accounts
-
   alias GoogleSearchDataViewer.Accounts.User
 
   @valid_attrs %{email: "test@gmail.com", password: "aValidPasswordEntered"}

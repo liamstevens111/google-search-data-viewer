@@ -1,8 +1,6 @@
 defmodule GoogleSearchDataViewer.UserFactory do
   alias GoogleSearchDataViewer.Accounts.User
 
-  # Define your factories in /test/factories and declare it here,
-  # eg: `use GoogleSearchDataViewer.Accounts.UserFactory`
   defmacro __using__(_opts) do
     quote do
       alias GoogleSearchDataViewer.Accounts.Passwords
