@@ -1,18 +1,16 @@
 defmodule GoogleSearchDataViewerWeb.SessionControllerTest do
   use GoogleSearchDataViewerWeb.ConnCase
-  import GoogleSearchDataViewer.AccountsFixtures
 
-  @valid_email "test@gmail.com"
-  @valid_password "aValidPasswordEntered"
+  @valid_attrs %{email: "test@gmail.com", password: "aValidPasswordEntered"}
 
   describe "POST create/2" do
     test "signs a user in given correct email and password", %{conn: conn} do
-      user_fixture()
+      insert(:user, email: @valid_attrs[:email], password: @valid_attrs[:password])
 
       conn =
         post conn, Routes.session_path(conn, :create), %{
-          "email" => @valid_email,
-          "password" => @valid_password
+          "email" => @valid_attrs[:email],
+          "password" => @valid_attrs[:password]
         }
 
       assert get_session(conn, :user_id)
@@ -20,7 +18,7 @@ defmodule GoogleSearchDataViewerWeb.SessionControllerTest do
     end
 
     test "failed user sign in given incorrect email and password", %{conn: conn} do
-      user_fixture()
+      insert(:user, email: @valid_attrs[:email], password: @valid_attrs[:password])
 
       conn =
         post conn, Routes.session_path(conn, :create), %{
@@ -35,12 +33,12 @@ defmodule GoogleSearchDataViewerWeb.SessionControllerTest do
 
   describe "DELETE create/2" do
     test "when user is signed in, signs a user out", %{conn: conn} do
-      user = user_fixture()
+      user = insert(:user, email: @valid_attrs[:email], password: @valid_attrs[:password])
 
       conn =
         post(conn, Routes.session_path(conn, :create), %{
-          "email" => @valid_email,
-          "password" => @valid_password
+          "email" => @valid_attrs[:email],
+          "password" => @valid_attrs[:password]
         })
 
       assert get_session(conn, :user_id)
