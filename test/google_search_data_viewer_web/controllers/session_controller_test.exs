@@ -24,7 +24,7 @@ defmodule GoogleSearchDataViewerWeb.SessionControllerTest do
       assert redirected_to(conn, 302) =~ "/"
     end
 
-    test "given a non-existing email and password, fail to sign the user in", %{conn: conn} do
+    test "given a non-existing email and password, fails to sign the user in", %{conn: conn} do
       insert(:user, email: @valid_attrs[:email], password: @valid_attrs[:password])
 
       conn =
@@ -39,7 +39,7 @@ defmodule GoogleSearchDataViewerWeb.SessionControllerTest do
   end
 
   describe "DELETE /sessions/:id" do
-    test "when a user is signed in, sign the user out", %{conn: conn} do
+    test "when a user is signed in, signs the user out", %{conn: conn} do
       user = insert(:user, email: @valid_attrs[:email], password: @valid_attrs[:password])
 
       conn =
