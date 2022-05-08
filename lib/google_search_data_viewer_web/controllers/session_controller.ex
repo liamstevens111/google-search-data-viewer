@@ -1,9 +1,7 @@
 defmodule GoogleSearchDataViewerWeb.SessionController do
   use GoogleSearchDataViewerWeb, :controller
 
-  def new(conn, _params) do
-    render(conn, "new.html")
-  end
+  def new(conn, _params), do: render(conn, "new.html")
 
   def create(conn, %{"email" => email, "password" => password}) do
     case GoogleSearchDataViewer.Accounts.validate_email_and_password(email, password) do

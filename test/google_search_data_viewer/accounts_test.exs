@@ -16,10 +16,16 @@ defmodule GoogleSearchDataViewer.AccountsTest do
   end
 
   describe "get_user!/1" do
-    test "given a valid id, returns the existing user with the given id or returns an error if doesn't exist" do
+    test "given a valid id, returns the existing user with the given id" do
       user = insert(:user)
 
       assert Accounts.get_user!(user.id) == user
+    end
+
+    test "given an invalid id, returns an error indicating it doesn't exist" do
+      assert_raise Ecto.NoResultsError, fn ->
+        Accounts.get_user!(-1)
+      end
     end
   end
 
@@ -29,6 +35,10 @@ defmodule GoogleSearchDataViewer.AccountsTest do
 
       assert Accounts.get_user(user.id) == user
     end
+
+    test "given an invalid id, returns nil indicating it doesn't exist" do
+      assert Accounts.get_user(-1) == nil
+    end
   end
 
   describe "get_user_by_email/1" do
@@ -36,6 +46,9 @@ defmodule GoogleSearchDataViewer.AccountsTest do
       user = insert(:user)
 
       assert Accounts.get_user_by_email(user.email) == user
+    end
+    test "given an invalid email, returns nil" do
+      assert Accounts.get_user_by_email("nonexistantemail@email.com") == nil
     end
   end
 

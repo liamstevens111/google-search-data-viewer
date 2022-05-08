@@ -5,17 +5,13 @@ defmodule GoogleSearchDataViewer.Accounts do
   alias GoogleSearchDataViewer.Accounts.User
   alias GoogleSearchDataViewer.Repo
 
-  def list_users do
-    Repo.all(User)
-  end
+  def list_users, do: Repo.all(User)
 
   def get_user!(id), do: Repo.get!(User, id)
 
   def get_user(id), do: Repo.get(User, id)
 
-  def get_user_by_email(email) do
-    Repo.get_by(User, email: email)
-  end
+  def get_user_by_email(email), do: Repo.get_by(User, email: email)
 
   def create_user(attrs \\ %{}) do
     %User{}
@@ -23,9 +19,7 @@ defmodule GoogleSearchDataViewer.Accounts do
     |> Repo.insert()
   end
 
-  def change_user(%User{} = user, attrs \\ %{}) do
-    User.changeset(user, attrs)
-  end
+  def change_user(%User{} = user, attrs \\ %{}), do: User.changeset(user, attrs)
 
   def validate_email_and_password(email, password) do
     user = get_user_by_email(email)
