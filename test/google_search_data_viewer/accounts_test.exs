@@ -47,6 +47,7 @@ defmodule GoogleSearchDataViewer.AccountsTest do
 
       assert Accounts.get_user_by_email(user.email) == user
     end
+
     test "given an invalid email, returns nil" do
       assert Accounts.get_user_by_email("nonexistantemail@email.com") == nil
     end
