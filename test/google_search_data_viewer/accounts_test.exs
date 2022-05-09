@@ -1,8 +1,8 @@
 defmodule GoogleSearchDataViewer.AccountsTest do
   use GoogleSearchDataViewer.DataCase, async: true
 
-  alias GoogleSearchDataViewer.Accounts
-  alias GoogleSearchDataViewer.Accounts.User
+  alias GoogleSearchDataViewer.Accounts.Account
+  alias GoogleSearchDataViewer.Accounts.Schemas.User
 
   @valid_attrs %{email: "test@gmail.com", password: "aValidPasswordEntered"}
   @invalid_attrs %{email: "someemail", password: "somepassword"}
@@ -11,7 +11,7 @@ defmodule GoogleSearchDataViewer.AccountsTest do
     test "returns all users" do
       user = insert(:user)
 
-      assert Accounts.list_users() == [user]
+      assert Account.list_users() == [user]
     end
   end
 
@@ -19,12 +19,12 @@ defmodule GoogleSearchDataViewer.AccountsTest do
     test "given a valid id, returns the existing user with the given id" do
       user = insert(:user)
 
-      assert Accounts.get_user!(user.id) == user
+      assert Account.get_user!(user.id) == user
     end
 
     test "given an invalid id, returns an error indicating it doesn't exist" do
       assert_raise Ecto.NoResultsError, fn ->
-        Accounts.get_user!(-1)
+        Account.get_user!(-1)
       end
     end
   end
@@ -33,11 +33,11 @@ defmodule GoogleSearchDataViewer.AccountsTest do
     test "given an id, returns the existing user with the given id" do
       user = insert(:user)
 
-      assert Accounts.get_user(user.id) == user
+      assert Account.get_user(user.id) == user
     end
 
     test "given an invalid id, returns nil indicating it doesn't exist" do
-      assert Accounts.get_user(-1) == nil
+      assert Account.get_user(-1) == nil
     end
   end
 
@@ -45,19 +45,19 @@ defmodule GoogleSearchDataViewer.AccountsTest do
     test "given an email and password, validates correctly for existing email and password" do
       user = insert(:user, password: @valid_attrs[:password])
 
-      assert Accounts.validate_email_and_password(user.email, @valid_attrs[:password]) ==
+      assert Account.validate_email_and_password(user.email, @valid_attrs[:password]) ==
                {:ok, user}
     end
 
     test "given an incorrect email and password, fails to validate for existing password and email" do
       user = insert(:user)
 
-      assert Accounts.validate_email_and_password(user.email, "wrongpassword") ==
+      assert Account.validate_email_and_password(user.email, "wrongpassword") ==
                {:error, :unauthorized}
     end
 
     test "given a non-existant email and password, fails to validate and returns an error" do
-      assert Accounts.validate_email_and_password("invalid@gmail.com", "wrongpassword") ==
+      assert Account.validate_email_and_password("invalid@gmail.com", "wrongpassword") ==
                {:error, :not_found}
     end
   end
@@ -66,12 +66,12 @@ defmodule GoogleSearchDataViewer.AccountsTest do
     test "with valid data, creates a user" do
       valid_attrs = %{email: "some@validemail.com", password: "somepassword"}
 
-      assert {:ok, %User{} = user} = Accounts.create_user(valid_attrs)
+      assert {:ok, %User{} = user} = Account.create_user(valid_attrs)
       assert user.email == "some@validemail.com"
     end
 
     test "with invalid data, returns an error" do
-      assert {:error, %Ecto.Changeset{}} = Accounts.create_user(@invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Account.create_user(@invalid_attrs)
     end
   end
 end

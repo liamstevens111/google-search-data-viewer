@@ -1,5 +1,5 @@
 defmodule GoogleSearchDataViewer.UserFactory do
-  alias GoogleSearchDataViewer.Accounts.User
+  alias GoogleSearchDataViewer.Accounts.Schemas.User
 
   defmacro __using__(_opts) do
     quote do

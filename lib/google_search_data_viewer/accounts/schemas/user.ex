@@ -1,4 +1,4 @@
-defmodule GoogleSearchDataViewer.Accounts.User do
+defmodule GoogleSearchDataViewer.Accounts.Schemas.User do
   use Ecto.Schema
 
   import Ecto.Changeset

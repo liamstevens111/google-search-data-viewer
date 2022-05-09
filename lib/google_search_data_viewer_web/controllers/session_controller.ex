@@ -1,10 +1,12 @@
 defmodule GoogleSearchDataViewerWeb.SessionController do
   use GoogleSearchDataViewerWeb, :controller
 
+  alias GoogleSearchDataViewer.Accounts.Account
+
   def new(conn, _params), do: render(conn, "new.html")
 
   def create(conn, %{"email" => email, "password" => password}) do
-    case GoogleSearchDataViewer.Accounts.validate_email_and_password(email, password) do
+    case Account.validate_email_and_password(email, password) do
       {:ok, user} ->
         conn
         |> GoogleSearchDataViewerWeb.AuthHelper.sign_in(user)
