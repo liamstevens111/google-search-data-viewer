@@ -25,7 +25,6 @@ defmodule GoogleSearchDataViewer.Accounts.User do
     |> validate_required([:email, :password])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
     |> validate_length(:password, min: 12)
-    |> unsafe_validate_unique(:email, GoogleSearchDataViewer.Repo)
     |> unique_constraint(:email)
     |> hash_password(attrs)
   end

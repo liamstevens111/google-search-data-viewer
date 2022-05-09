@@ -6,7 +6,7 @@ defmodule GoogleSearchDataViewerWeb.UserController do
   alias GoogleSearchDataViewerWeb.AuthController
 
   def new(conn, _params) do
-    changeset = Accounts.change_user(%User{})
+    changeset = User.changeset(%User{}, %{})
 
     render(conn, "new.html", changeset: changeset)
   end

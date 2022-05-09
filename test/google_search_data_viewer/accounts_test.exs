@@ -1,5 +1,5 @@
 defmodule GoogleSearchDataViewer.AccountsTest do
-  use GoogleSearchDataViewer.DataCase
+  use GoogleSearchDataViewer.DataCase, async: true
 
   alias GoogleSearchDataViewer.Accounts
   alias GoogleSearchDataViewer.Accounts.User
@@ -41,18 +41,6 @@ defmodule GoogleSearchDataViewer.AccountsTest do
     end
   end
 
-  describe "get_user_by_email/1" do
-    test "given an email, returns the existing user with the given email" do
-      user = insert(:user)
-
-      assert Accounts.get_user_by_email(user.email) == user
-    end
-
-    test "given an invalid email, returns nil" do
-      assert Accounts.get_user_by_email("nonexistantemail@email.com") == nil
-    end
-  end
-
   describe "validate_email_and_password/2" do
     test "given an email and password, validates correctly for existing email and password" do
       user = insert(:user, password: @valid_attrs[:password])
@@ -84,14 +72,6 @@ defmodule GoogleSearchDataViewer.AccountsTest do
 
     test "with invalid data, returns an error" do
       assert {:error, %Ecto.Changeset{}} = Accounts.create_user(@invalid_attrs)
-    end
-  end
-
-  describe "change_user/1" do
-    test "given a user, returns a user changeset" do
-      user = insert(:user)
-
-      assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
   end
 end
