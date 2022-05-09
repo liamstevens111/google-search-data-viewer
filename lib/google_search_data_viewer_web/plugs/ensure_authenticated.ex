@@ -1,3 +1,5 @@
+# TODO: Remove # coveralls-ignore-stop
+
 # coveralls-ignore-start
 defmodule GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug do
   import Plug.Conn

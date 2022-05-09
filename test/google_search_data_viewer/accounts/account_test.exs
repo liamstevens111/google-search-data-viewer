@@ -1,4 +1,4 @@
-defmodule GoogleSearchDataViewer.AccountsTest do
+defmodule GoogleSearchDataViewer.Accounts.AccountTest do
   use GoogleSearchDataViewer.DataCase, async: true
 
   alias GoogleSearchDataViewer.Accounts.Account
