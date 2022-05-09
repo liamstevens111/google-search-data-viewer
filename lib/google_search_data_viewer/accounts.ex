@@ -11,8 +11,6 @@ defmodule GoogleSearchDataViewer.Accounts do
 
   def get_user(id), do: Repo.get(User, id)
 
-  @spec create_user(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}) ::
-          any
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.register_changeset(attrs)
