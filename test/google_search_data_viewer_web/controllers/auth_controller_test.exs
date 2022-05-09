@@ -1,3 +1,0 @@
-defmodule GoogleSearchDataViewerWeb.AuthControllerTest do
-  use GoogleSearchDataViewerWeb.ConnCase
-end

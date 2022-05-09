@@ -3,7 +3,6 @@ defmodule GoogleSearchDataViewerWeb.UserController do
 
   alias GoogleSearchDataViewer.Accounts
   alias GoogleSearchDataViewer.Accounts.User
-  alias GoogleSearchDataViewerWeb.AuthController
 
   def new(conn, _params) do
     changeset = User.changeset(%User{}, %{})
@@ -15,7 +14,7 @@ defmodule GoogleSearchDataViewerWeb.UserController do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         conn
-        |> AuthController.sign_in(user)
+        |> GoogleSearchDataViewerWeb.AuthHelper.sign_in(user)
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: Routes.page_path(conn, :index))
 

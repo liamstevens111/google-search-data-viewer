@@ -1,4 +1,4 @@
-defmodule GoogleSearchDataViewerWeb.AuthController do
+defmodule GoogleSearchDataViewerWeb.AuthHelper do
   use GoogleSearchDataViewerWeb, :controller
 
   import Plug.Conn

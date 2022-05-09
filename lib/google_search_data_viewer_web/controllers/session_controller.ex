@@ -7,7 +7,7 @@ defmodule GoogleSearchDataViewerWeb.SessionController do
     case GoogleSearchDataViewer.Accounts.validate_email_and_password(email, password) do
       {:ok, user} ->
         conn
-        |> GoogleSearchDataViewerWeb.AuthController.sign_in(user)
+        |> GoogleSearchDataViewerWeb.AuthHelper.sign_in(user)
         |> put_flash(:info, "Welcome, you have signed in!")
         |> redirect(to: Routes.page_path(conn, :index))
 
@@ -20,7 +20,7 @@ defmodule GoogleSearchDataViewerWeb.SessionController do
 
   def delete(conn, _params) do
     conn
-    |> GoogleSearchDataViewerWeb.AuthController.sign_out()
+    |> GoogleSearchDataViewerWeb.AuthHelper.sign_out()
     |> put_flash(:info, "You have signed out")
     |> redirect(to: Routes.page_path(conn, :index))
   end
