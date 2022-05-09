@@ -10,7 +10,7 @@ defmodule GoogleSearchDataViewer.Accounts.Schemas.UserTest do
       refute user_changeset.valid?
     end
 
-    test "given an changeset with email and password fields, validates" do
+    test "given a changeset with email and password fields, validates" do
       user_changeset =
         User.changeset(%User{}, %{email: "testemail@email.com", password: "aValidPassword"})
 
@@ -28,7 +28,7 @@ defmodule GoogleSearchDataViewer.Accounts.Schemas.UserTest do
       assert %{email: ["must have the @ sign and no spaces"]} = errors_on(user_changeset)
     end
 
-    test "given an pre-registered email, shows validation error for unique email constraint" do
+    test "given a pre-registered email, shows validation error for unique email constraint" do
       insert(:user, email: "duplicate@email.com", password: "aValidPassword")
 
       user_changeset =
