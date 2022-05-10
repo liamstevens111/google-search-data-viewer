@@ -40,6 +40,7 @@ defmodule GoogleSearchDataViewer.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bcrypt_elixir, "~> 3.0"},
       {:credo, "~> 1.6.4", [only: [:dev, :test], runtime: false]},
       {:dialyxir, "~> 1.1.0", [only: [:dev], runtime: false]},
       {:ecto_sql, "~> 3.6"},
@@ -80,7 +81,7 @@ defmodule GoogleSearchDataViewer.MixProject do
     [
       prettier: "cmd ./assets/node_modules/.bin/prettier --check . --color",
       "prettier.fix": "cmd ./assets/node_modules/.bin/prettier --write . --color",
-  "gettext.extract-and-merge": ["gettext.extract --merge --no-fuzzy"],
+      "gettext.extract-and-merge": ["gettext.extract --merge --no-fuzzy"],
       "ecto.migrate_all": [
         "ecto.migrate --migrations-path=priv/repo/migrations --migrations-path=priv/repo/data_migrations"
       ],

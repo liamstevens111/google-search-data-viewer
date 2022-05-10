@@ -8,21 +8,32 @@ defmodule GoogleSearchDataViewerWeb.Router do
     plug :put_root_layout, {GoogleSearchDataViewerWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug GoogleSearchDataViewerWeb.PutCurrentUserPlug
   end
 
   # coveralls-ignore-start
+  pipeline :authorized do
+    plug GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   # coveralls-ignore-stop
 
-  forward Application.get_env(:google_search_data_viewer, GoogleSearchDataViewerWeb.Endpoint)[:health_path], GoogleSearchDataViewerWeb.HealthPlug
+  forward Application.get_env(:google_search_data_viewer, GoogleSearchDataViewerWeb.Endpoint)[
+            :health_path
+          ],
+          GoogleSearchDataViewerWeb.HealthPlug
 
   scope "/", GoogleSearchDataViewerWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    resources "/users", UserController, only: [:create, :new]
+    resources "/sessions", SessionController, only: [:create, :new, :delete]
   end
 
   # Other scopes may use custom stacks.
