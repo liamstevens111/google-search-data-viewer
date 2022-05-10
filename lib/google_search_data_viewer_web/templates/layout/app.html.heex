@@ -4,10 +4,7 @@
       <%= if @current_user do %>
         <li>Signed in as <%= @current_user.email %></li>
         <li><%= link "Sign out", to: Routes.session_path(@conn, :delete, @current_user), method: :delete %></li>
-<<<<<<< HEAD
         <li><%= link "Keywords", to: Routes.keyword_path(@conn, :index), method: :get %></li>
-=======
->>>>>>> develop
       <% else %>
         <li><%= link "Sign up", to: Routes.user_path(@conn, :new), method: :get %></li> 
         <li><%= link "Sign in", to: Routes.session_path(@conn, :new), method: :get %></li>
