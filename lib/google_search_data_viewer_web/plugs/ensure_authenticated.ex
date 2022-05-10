@@ -18,6 +18,7 @@ defmodule GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug do
         |> put_flash(:error, "Please sign in to use this service")
         |> redirect(to: Routes.page_path(conn, :index))
         |> halt()
+
       _user ->
         conn
     end
