@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+# TODO: Remove # coveralls-ignore-stop
+
+# coveralls-ignore-start
+>>>>>>> develop
 defmodule GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug do
   import Plug.Conn
   import Phoenix.Controller
@@ -19,7 +25,11 @@ defmodule GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug do
         |> redirect(to: Routes.page_path(conn, :index))
         |> halt()
 
+<<<<<<< HEAD
       _user ->
+=======
+      true ->
+>>>>>>> develop
         conn
     end
   end
@@ -28,3 +38,8 @@ defmodule GoogleSearchDataViewerWeb.EnsureAuthenticatedPlug do
 
   defp get_user(user_id), do: Account.get_user(user_id)
 end
+<<<<<<< HEAD
+=======
+
+# coveralls-ignore-stop
+>>>>>>> develop

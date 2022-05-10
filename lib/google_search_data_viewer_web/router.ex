@@ -34,6 +34,7 @@ defmodule GoogleSearchDataViewerWeb.Router do
 
     resources "/users", UserController, only: [:create, :new]
     resources "/sessions", SessionController, only: [:create, :new, :delete]
+<<<<<<< HEAD
   end
 
   scope "/keywords", GoogleSearchDataViewerWeb do
@@ -42,6 +43,8 @@ defmodule GoogleSearchDataViewerWeb.Router do
     get "/", KeywordController, :index
 
     post "/upload", KeywordController, :upload
+=======
+>>>>>>> develop
   end
 
   # Other scopes may use custom stacks.

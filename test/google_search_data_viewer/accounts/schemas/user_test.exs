@@ -7,7 +7,7 @@ defmodule GoogleSearchDataViewer.Accounts.Schemas.UserTest do
     test "given an empty changeset with empty fields, fails to validate" do
       user_changeset = User.changeset(%User{}, %{})
 
-      refute user_changeset.valid?
+      assert user_changeset.valid? == false
     end
 
     test "given a changeset with email and password fields, validates" do
@@ -23,9 +23,9 @@ defmodule GoogleSearchDataViewer.Accounts.Schemas.UserTest do
       user_changeset =
         User.register_changeset(%User{}, %{email: "testemail", password: "aValidPassword"})
 
-      refute user_changeset.valid?
+      assert user_changeset.valid? == false
 
-      assert %{email: ["must have the @ sign and no spaces"]} = errors_on(user_changeset)
+      assert errors_on(user_changeset) == %{email: ["must have the @ sign and no spaces"]}
     end
 
     test "given a pre-registered email, shows validation error for unique email constraint" do
@@ -36,18 +36,18 @@ defmodule GoogleSearchDataViewer.Accounts.Schemas.UserTest do
 
       assert {:error, user_changeset} = Repo.insert(user_changeset)
 
-      refute user_changeset.valid?
+      assert user_changeset.valid? == false
 
-      assert %{email: ["has already been taken"]} = errors_on(user_changeset)
+      assert errors_on(user_changeset) == %{email: ["has already been taken"]}
     end
 
     test "given a password length less than 12, shows validation error for password" do
       user_changeset =
         User.register_changeset(%User{}, %{email: "testemail@email.com", password: "ashortpass"})
 
-      refute user_changeset.valid?
+      assert user_changeset.valid? == false
 
-      assert %{password: ["should be at least 12 character(s)"]} = errors_on(user_changeset)
+      assert errors_on(user_changeset) == %{password: ["should be at least 12 character(s)"]}
     end
   end
 end
