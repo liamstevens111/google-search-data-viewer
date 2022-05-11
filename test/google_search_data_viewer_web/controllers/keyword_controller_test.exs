@@ -18,7 +18,8 @@ defmodule GoogleSearchDataViewerWeb.KeywordControllerTest do
     test "given a valid csv file extension, uploads the file", %{conn: conn} do
       file = %Plug.Upload{
         path: "test/support/fixtures/keywords/valid_keywords.csv",
-        filename: "valid_keywords.csv"
+        filename: "valid_keywords.csv",
+        content_type: "text/csv"
       }
 
       user = insert(:user)
@@ -32,12 +33,51 @@ defmodule GoogleSearchDataViewerWeb.KeywordControllerTest do
       assert redirected_to(conn, 302) =~ "/keywords"
     end
 
+    test "given an empty keywords file, fails to upload the file", %{conn: conn} do
+      file = %Plug.Upload{
+        path: "test/support/fixtures/keywords/empty_keywords.csv",
+        filename: "empty_keywords.csv",
+        content_type: "text/csv"
+      }
+
+      user = insert(:user)
+
+      conn =
+        conn
+        |> init_test_session(user_id: user.id)
+        |> post("/keywords/upload", %{:file => file})
+
+      assert conn.halted == true
+      assert get_flash(conn, :error) =~ "Length invalid"
+      assert redirected_to(conn, 302) =~ "/keywords"
+    end
+
+    test "given an invalid file extension, fails to upload the file", %{conn: conn} do
+      file = %Plug.Upload{
+        path: "test/support/fixtures/keywords/invalid_format_keywords.txt",
+        filename: "invalid_format_keywords.txt",
+        content_type: "text/plain"
+      }
+
+      user = insert(:user)
+
+      conn =
+        conn
+        |> init_test_session(user_id: user.id)
+        |> post("/keywords/upload", %{:file => file})
+
+      assert conn.halted == true
+      assert get_flash(conn, :error) =~ "Format invalid"
+      assert redirected_to(conn, 302) =~ "/keywords"
+    end
+
     test "given an unauthenticated user, fails to upload and redirects to the home page", %{
       conn: conn
     } do
       file = %Plug.Upload{
         path: "test/support/fixtures/keywords/valid_keywords.csv",
-        filename: "valid_keywords.csv"
+        filename: "valid_keywords.csv",
+        content_type: "text/csv"
       }
 
       conn = post(conn, "/keywords/upload", %{:file => file})
