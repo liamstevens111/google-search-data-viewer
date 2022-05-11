@@ -32,7 +32,9 @@ defmodule GoogleSearchDataViewerWeb.KeywordControllerTest do
       assert redirected_to(conn, 302) =~ "/keywords"
     end
 
-    test "given an unauthenticated user, fails to upload and redirects to the home page", %{conn: conn} do
+    test "given an unauthenticated user, fails to upload and redirects to the home page", %{
+      conn: conn
+    } do
       file = %Plug.Upload{
         path: "test/support/fixtures/keywords/valid_keywords.csv",
         filename: "valid_keywords.csv"
