@@ -48,14 +48,14 @@ defmodule GoogleSearchDataViewerWeb.KeywordControllerTest do
         |> post("/keywords/upload", %{:file => file})
 
       assert conn.halted == true
-      assert get_flash(conn, :error) =~ "Length invalid"
+      assert get_flash(conn, :error) =~ "Length invalid. 1-1000 keywords only"
       assert redirected_to(conn, 302) =~ "/keywords"
     end
 
     test "given an invalid file extension, fails to upload the file", %{conn: conn} do
       file = %Plug.Upload{
-        path: "test/support/fixtures/keywords/invalid_format_keywords.txt",
-        filename: "invalid_format_keywords.txt",
+        path: "test/support/fixtures/keywords/invalid_extension_keywords.txt",
+        filename: "invalid_extension_keywords.txt",
         content_type: "text/plain"
       }
 
@@ -67,7 +67,7 @@ defmodule GoogleSearchDataViewerWeb.KeywordControllerTest do
         |> post("/keywords/upload", %{:file => file})
 
       assert conn.halted == true
-      assert get_flash(conn, :error) =~ "Format invalid"
+      assert get_flash(conn, :error) =~ "File extension invalid, csv only"
       assert redirected_to(conn, 302) =~ "/keywords"
     end
 

@@ -12,15 +12,15 @@ defmodule GoogleSearchDataViewerWeb.KeywordController do
         |> put_flash(:info, "File successfully uploaded")
         |> redirect(to: Routes.keyword_path(conn, :index))
 
-      {:error, :invalid_format} ->
+      {:error, :invalid_extension} ->
         conn
-        |> put_flash(:error, "Format invalid")
+        |> put_flash(:error, "File extension invalid, csv only")
         |> redirect(to: Routes.keyword_path(conn, :index))
         |> halt()
 
       {:error, :invalid_length} ->
         conn
-        |> put_flash(:error, "Length invalid")
+        |> put_flash(:error, "Length invalid. 1-1000 keywords only")
         |> redirect(to: Routes.keyword_path(conn, :index))
         |> halt()
     end

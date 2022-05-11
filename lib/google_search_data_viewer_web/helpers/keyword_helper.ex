@@ -8,7 +8,7 @@ defmodule GoogleSearchDataViewerWeb.KeywordHelper do
          {:ok, keywords} <- parse_keyword_file(file) do
       {:ok, keywords}
     else
-      false -> {:error, :invalid_format}
+      false -> {:error, :invalid_extension}
       :error -> {:error, :invalid_length}
     end
   end
