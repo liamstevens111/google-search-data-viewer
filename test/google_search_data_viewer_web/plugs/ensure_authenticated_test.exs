@@ -18,9 +18,9 @@ defmodule GoogleSearchDataViewerWeb.EnsureAuthenticatedPlugTest do
         |> EnsureAuthenticatedPlug.call([])
 
       assert conn.assigns.current_user == nil
+      assert conn.halted == true
       assert get_flash(conn, :error) =~ "Please sign in to use this service"
       assert redirected_to(conn, 302) =~ "/"
-      assert conn.halted == true
     end
   end
 end
