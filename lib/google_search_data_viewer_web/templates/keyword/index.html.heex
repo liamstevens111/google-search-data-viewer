@@ -1,0 +1,7 @@
+<section class="phx-hero">
+  <h1>Keywords</h1>
+
+  <h3>Select a csv file to upload keywords. </h3>
+  <h3>Maximum keywords per file: 1000 </h3>
+  <%= render "form.html", Map.put(assigns, :action, Routes.keyword_path(@conn, :upload)) %>
+</section>
