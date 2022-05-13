@@ -19,7 +19,7 @@ defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload do
   end
 
   @doc false
-  def changeset(keyword_upload, attrs) do
+  def changeset(keyword_upload \\ %__MODULE__{}, attrs) do
     keyword_upload
     |> cast(attrs, [:name, :user_id])
     |> put_change(:status, :pending)
