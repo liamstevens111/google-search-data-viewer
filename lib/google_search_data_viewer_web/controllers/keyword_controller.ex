@@ -9,10 +9,11 @@ defmodule GoogleSearchDataViewerWeb.KeywordController do
   def upload(conn, %{"file" => file}) do
     case KeywordHelper.validate_and_parse_keyword_file(file) do
       {:ok, keywords} ->
-        KeywordUpload.create_keyword_uploads(keywords, conn.assigns.current_user)
+        keywords_inserted =
+          KeywordUpload.create_keyword_uploads(keywords, conn.assigns.current_user)
 
         conn
-        |> put_flash(:info, "File successfully uploaded")
+        |> put_flash(:info, "File successfully uploaded. #{keywords_inserted} keywords uploaded.")
         |> redirect(to: Routes.keyword_path(conn, :index))
 
       {:error, :invalid_extension} ->
