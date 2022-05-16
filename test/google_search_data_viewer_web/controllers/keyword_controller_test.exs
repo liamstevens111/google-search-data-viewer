@@ -67,7 +67,6 @@ defmodule GoogleSearchDataViewerWeb.KeywordControllerTest do
         |> init_test_session(user_id: user.id)
         |> post("/keywords/upload", %{:file => file})
 
-      assert conn.halted == true
       assert get_flash(conn, :error) =~ "Length invalid. 1-1000 keywords only"
       assert redirected_to(conn, 302) =~ "/keywords"
     end
@@ -86,7 +85,6 @@ defmodule GoogleSearchDataViewerWeb.KeywordControllerTest do
         |> init_test_session(user_id: user.id)
         |> post("/keywords/upload", %{:file => file})
 
-      assert conn.halted == true
       assert get_flash(conn, :error) =~ "File extension invalid, csv only"
       assert redirected_to(conn, 302) =~ "/keywords"
     end
