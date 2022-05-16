@@ -1,4 +1,4 @@
-defmodule GoogleSearchDataViewer.Repo.Migrations.KeyworduploadBelongsToUser do
+defmodule GoogleSearchDataViewer.Repo.Migrations.KeywordUploadBelongsToUser do
   use Ecto.Migration
 
   def change do

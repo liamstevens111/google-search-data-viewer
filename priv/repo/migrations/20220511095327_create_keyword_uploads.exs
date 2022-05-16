@@ -3,9 +3,9 @@ defmodule GoogleSearchDataViewer.Repo.Migrations.CreateKeywordUploads do
 
   def change do
     create table(:keyword_uploads) do
-      add :name, :string
+      add :name, :string, null: false
       add :html, :text
-      add :status, :string
+      add :status, :string, null: false
 
       timestamps()
     end
