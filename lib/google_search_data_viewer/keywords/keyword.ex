@@ -9,8 +9,13 @@ defmodule GoogleSearchDataViewer.Keywords.Keyword do
   end
 
   def create_keyword_uploads(keywords, user) do
-    current_date_time = NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second)
+    keywords
+    |> process_keyword_params(user)
+    |> insert_keyword_uploads()
+    |> elem(0)
+  end
 
+  defp process_keyword_params(keywords, user) do
     keywords
     |> Enum.map(fn keyword ->
       create_params_for_keyword_and_user(keyword, user.id)
@@ -18,9 +23,7 @@ defmodule GoogleSearchDataViewer.Keywords.Keyword do
     |> Enum.map(fn params -> create_changeset_and_parse(params) end)
     |> Enum.map(&Map.from_struct/1)
     |> Enum.map(fn params -> Map.drop(params, [:__meta__, :user, :id]) end)
-    |> Enum.map(fn params -> insert_timestamps(params, current_date_time) end)
-    |> insert_keyword_uploads()
-    |> elem(0)
+    |> Enum.map(fn params -> insert_timestamps(params) end)
   end
 
   defp create_params_for_keyword_and_user(keyword, user_id) do
@@ -36,9 +39,11 @@ defmodule GoogleSearchDataViewer.Keywords.Keyword do
     |> Ecto.Changeset.apply_changes()
   end
 
-  defp insert_timestamps(params, time) do
+  defp insert_timestamps(params) do
+    current_date_time = NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second)
+
     params
-    |> Map.put(:inserted_at, time)
-    |> Map.put(:updated_at, time)
+    |> Map.put(:inserted_at, current_date_time)
+    |> Map.put(:updated_at, current_date_time)
   end
 end
