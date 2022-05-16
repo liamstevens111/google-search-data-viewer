@@ -16,5 +16,24 @@ defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUploadTest do
 
       assert keyword_upload_changeset.valid? == false
     end
+
+    test "given a changeset with keyword name and existing user id, validates" do
+      %{id: user_id} = insert(:user)
+
+      keyword_upload_changeset =
+        KeywordUpload.changeset(%KeywordUpload{}, %{name: "cat", user_id: user_id})
+
+      assert keyword_upload_changeset.valid? == true
+      assert keyword_upload_changeset.changes == %{name: "cat", user_id: user_id}
+    end
+
+    test "given an invalid user, return invalid changeset" do
+      keyword_upload_changeset =
+        KeywordUpload.changeset(%KeywordUpload{}, %{name: "cat", user_id: -1})
+
+      assert {:error, changeset} = Repo.insert(keyword_upload_changeset)
+
+      assert errors_on(changeset) == %{user: ["does not exist"]}
+    end
   end
 end
