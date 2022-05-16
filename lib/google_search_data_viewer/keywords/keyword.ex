@@ -4,6 +4,13 @@ defmodule GoogleSearchDataViewer.Keywords.Keyword do
   alias GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload
   alias GoogleSearchDataViewer.Repo
 
+  def get_keyword_uploads_for_user(user) do
+    KeywordUpload
+    |> where(user_id: ^user.id)
+    |> select([:name, :status])
+    |> Repo.all()
+  end
+
   def insert_keyword_uploads(attrs) do
     Repo.insert_all(KeywordUpload, attrs)
   end
