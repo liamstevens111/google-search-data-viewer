@@ -11,11 +11,13 @@
       <tr>
         <th>Keyword</th>
         <th>Status</th>
+        <th>Uploaded at</th>
       </tr>
       <%= for keyword <- @keywords do %>
       <tr> 
         <th><%= keyword.name %> </th>
         <th><%= keyword.status %> </th>
+        <th><%= format_date_time(keyword.inserted_at)%> </th>
       </tr>
       <% end %>
     </table>
