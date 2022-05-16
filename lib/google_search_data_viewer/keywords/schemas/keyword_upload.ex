@@ -18,7 +18,6 @@ defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload do
     timestamps()
   end
 
-  @doc false
   def changeset(keyword_upload \\ %__MODULE__{}, attrs) do
     keyword_upload
     |> cast(attrs, [:name, :user_id])
