@@ -21,7 +21,6 @@ defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload do
   def changeset(keyword_upload \\ %__MODULE__{}, attrs) do
     keyword_upload
     |> cast(attrs, [:name, :user_id])
-    |> put_change(:status, :pending)
     |> validate_required([:name, :user_id])
     |> assoc_constraint(:user)
   end

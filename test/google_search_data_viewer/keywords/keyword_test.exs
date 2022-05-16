@@ -4,7 +4,7 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
   alias GoogleSearchDataViewer.Keywords.Keyword
 
   describe "create_keyword_uploads/2" do
-    test "give a valid list of keywords and a user, creates keywords for the user." do
+    test "give a valid list of keywords and a user, creates keywords for the user" do
       user = insert(:user)
       keywords = ["dog", "cat", "fish"]
 
