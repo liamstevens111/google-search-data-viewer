@@ -33,6 +33,26 @@ defmodule GoogleSearchDataViewerWeb.KeywordControllerTest do
       assert redirected_to(conn, 302) =~ "/keywords"
     end
 
+    test "given a valid csv file extension with two keywords, returns an uploaded count of two", %{
+      conn: conn
+    } do
+      file = %Plug.Upload{
+        path: "test/support/fixtures/keywords/valid_two_keywords.csv",
+        filename: "valid_two_keywords.csv",
+        content_type: "text/csv"
+      }
+
+      user = insert(:user)
+
+      conn =
+        conn
+        |> init_test_session(user_id: user.id)
+        |> post("/keywords/upload", %{:file => file})
+
+      assert get_flash(conn, :info) =~ "File successfully uploaded. 2 keywords uploaded"
+      assert redirected_to(conn, 302) =~ "/keywords"
+    end
+
     test "given an empty keywords file, fails to upload the file", %{conn: conn} do
       file = %Plug.Upload{
         path: "test/support/fixtures/keywords/empty_keywords.csv",
