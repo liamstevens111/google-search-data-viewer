@@ -1,4 +1,4 @@
-defmodule GoogleSearchDataViewer.Keywords.KeywordUpload do
+defmodule GoogleSearchDataViewer.Keywords.Keyword do
   import Ecto.Query, warn: false
 
   alias GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload
