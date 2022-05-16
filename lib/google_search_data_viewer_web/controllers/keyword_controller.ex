@@ -4,7 +4,10 @@ defmodule GoogleSearchDataViewerWeb.KeywordController do
   alias GoogleSearchDataViewer.Keywords.Keyword
   alias GoogleSearchDataViewerWeb.KeywordHelper
 
-  def index(conn, _params), do: render(conn, "index.html")
+  def index(conn, _params) do
+    keywords = Keyword.get_keyword_uploads_for_user(conn.assigns.current_user)
+    render(conn, "index.html", keywords: keywords)
+  end
 
   def upload(conn, %{"file" => file}) do
     case KeywordHelper.validate_and_parse_keyword_file(file) do
