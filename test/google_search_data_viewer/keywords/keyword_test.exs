@@ -8,7 +8,7 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
       user = insert(:user)
       keywords = ["dog", "cat", "fish"]
 
-      assert Keyword.create_keyword_uploads(keywords, user) == length(keywords)
+      assert Keyword.create_keyword_uploads(keywords, user) == Enum.count(keywords)
     end
   end
 end

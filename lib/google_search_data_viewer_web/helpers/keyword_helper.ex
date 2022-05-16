@@ -23,7 +23,7 @@ defmodule GoogleSearchDataViewerWeb.KeywordHelper do
       |> Enum.to_list()
       |> List.flatten()
 
-    keywords_length = length(keywords)
+    keywords_length = Enum.count(keywords)
 
     if keywords_length > 0 && keywords_length <= @max_keyword_upload_count do
       {:ok, keywords}
