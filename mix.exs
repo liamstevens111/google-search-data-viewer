@@ -41,7 +41,6 @@ defmodule GoogleSearchDataViewer.MixProject do
   defp deps do
     [
       {:bcrypt_elixir, "~> 3.0"},
-      {:calendar, "~> 1.0.0"},
       {:credo, "~> 1.6.4", [only: [:dev, :test], runtime: false]},
       {:dialyxir, "~> 1.1.0", [only: [:dev], runtime: false]},
       {:ecto_sql, "~> 3.6"},
