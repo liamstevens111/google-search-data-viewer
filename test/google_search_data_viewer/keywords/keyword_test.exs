@@ -29,7 +29,7 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
                |> Repo.preload(:user)
     end
 
-    test "given an existing user with no uploaded keywords, returns no keywords for the user" do
+    test "given an existing user with no uploaded keywords, returns an empty list" do
       user1 = insert(:user)
       user2 = insert(:user)
 
