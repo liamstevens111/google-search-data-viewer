@@ -17,12 +17,13 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
   describe "get_keyword_uploads_for_user/1" do
     test "given an existing user with uploaded keywords, lists keywords for the user" do
       user = insert(:user)
+
       keywords = ["dog", "cat", "fish"]
 
-      {_keyword_count, returned_keywords} = Keyword.create_keyword_uploads(keywords, user)
+      keyword_uploads =
+        Enum.map(keywords, fn keyword -> insert(:keyword_upload, name: keyword, user: user) end)
 
-      assert Enum.map(returned_keywords, & &1.name) == keywords
-      assert Keyword.get_keyword_uploads_for_user(user) == returned_keywords
+      assert keyword_uploads == Repo.preload(Keyword.get_keyword_uploads_for_user(user), [:user])
     end
 
     test "given an existing user with no uploaded keywords, returns no keywords for the user" do
@@ -31,7 +32,7 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
 
       keywords = ["dog", "cat", "fish"]
 
-      Keyword.create_keyword_uploads(keywords, user1)
+      Enum.each(keywords, fn keyword -> insert(:keyword_upload, name: keyword, user: user1) end)
 
       assert Keyword.get_keyword_uploads_for_user(user2) == []
     end

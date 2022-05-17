@@ -6,9 +6,11 @@ defmodule GoogleSearchDataViewer.KeywordUploadFactory do
     quote do
       def keyword_upload_factory(attrs) do
         name = attrs[:name] || En.dish()
+        user = attrs[:user]
 
         %KeywordUpload{
-          name: name
+          name: name,
+          user: user
         }
       end
     end
