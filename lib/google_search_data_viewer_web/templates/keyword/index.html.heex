@@ -1,11 +1,11 @@
 <section class="phx-hero">
   <h1>Keywords</h1>
 
-  <h3>Select a csv file to upload keywords. </h3>
-  <h3>Maximum keywords per file: 1000 </h3>
+  <h3>Select a csv file to upload keywords.</h3>
+  <h3>Maximum keywords per file: 1000</h3>
   <%= render "form.html", Map.put(assigns, :action, Routes.keyword_path(@conn, :upload)) %>
 
-  <h3> Keywords </h3>
+  <h3>Keywords</h3>
   <div>
     <table>
       <tr>
@@ -14,10 +14,10 @@
         <th>Uploaded at</th>
       </tr>
       <%= for keyword <- @keywords do %>
-        <tr> 
-          <th><%= keyword.name %> </th>
-          <th><%= keyword.status %> </th>
-          <th><%= format_date_time(keyword.inserted_at)%> </th>
+        <tr>
+          <th><%= keyword.name %></th>
+          <th><%= keyword.status %></th>
+          <th><%= format_date_time(keyword.inserted_at) %></th>
         </tr>
       <% end %>
     </table>
