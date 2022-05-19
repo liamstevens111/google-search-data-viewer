@@ -4,15 +4,19 @@ defmodule GoogleSearchDataViewerWeb.KeywordController do
   alias GoogleSearchDataViewer.Keywords.Keyword
   alias GoogleSearchDataViewerWeb.KeywordHelper
 
-  def index(conn, _params), do: render(conn, "index.html")
+  def index(conn, _params) do
+    keywords = Keyword.get_keyword_uploads_for_user(conn.assigns.current_user)
+    render(conn, "index.html", keywords: keywords)
+  end
 
   def upload(conn, %{"file" => file}) do
     case KeywordHelper.validate_and_parse_keyword_file(file) do
       {:ok, keywords} ->
-        keywords_inserted = Keyword.create_keyword_uploads(keywords, conn.assigns.current_user)
+        {keyword_count, _keywords} =
+          Keyword.create_keyword_uploads(keywords, conn.assigns.current_user)
 
         conn
-        |> put_flash(:info, "File successfully uploaded. #{keywords_inserted} keywords uploaded.")
+        |> put_flash(:info, "File successfully uploaded. #{keyword_count} keywords uploaded.")
         |> redirect(to: Routes.keyword_path(conn, :index))
 
       {:error, :invalid_extension} ->
