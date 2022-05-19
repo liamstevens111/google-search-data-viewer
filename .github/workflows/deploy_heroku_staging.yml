@@ -18,6 +18,7 @@ env:
 jobs:
   deploy:
     name: Deploy to Heroku staging
+    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:

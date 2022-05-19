@@ -36,6 +36,14 @@ defmodule GoogleSearchDataViewerWeb.Router do
     resources "/sessions", SessionController, only: [:create, :new, :delete]
   end
 
+  scope "/keywords", GoogleSearchDataViewerWeb do
+    pipe_through [:browser, :authorized]
+
+    get "/", KeywordController, :index
+
+    post "/upload", KeywordController, :upload
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", GoogleSearchDataViewerWeb do
   #   pipe_through :api

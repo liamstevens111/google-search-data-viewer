@@ -50,5 +50,3 @@ config :logger, level: :info
 # Check `Plug.SSL` for all available options in `force_ssl`.
 config :google_search_data_viewer, GoogleSearchDataViewerWeb.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
-
-import_config "prod.secret.exs"

@@ -4,11 +4,14 @@ defmodule GoogleSearchDataViewer.Accounts.Schemas.User do
   import Ecto.Changeset
 
   alias GoogleSearchDataViewer.Accounts.Passwords
+  alias GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload
 
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true
     field :hashed_password, :string
+
+    has_many :keyword_uploads, KeywordUpload
 
     timestamps()
   end
