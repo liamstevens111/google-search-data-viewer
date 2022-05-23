@@ -5,7 +5,7 @@ defmodule GoogleSearchDataViewer.Keywords.GoogleSearchClient do
      "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"}
   ]
 
-  def search_and_fetch_html(keyword) do
+  def get_html(keyword) do
     search_url = @base_url <> URI.encode(keyword)
 
     case HTTPoison.get(search_url, @headers) do

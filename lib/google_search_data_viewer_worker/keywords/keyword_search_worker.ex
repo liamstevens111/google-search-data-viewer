@@ -13,7 +13,7 @@ defmodule GoogleSearchDataViewerWorker.Keywords.SearchWorker do
 
     {:ok, _} = Keyword.update_keyword_upload_status(keyword_upload, :inprogress)
 
-    {:ok, html_response} = GoogleSearchClient.search_and_fetch_html(keyword_upload.name)
+    {:ok, html_response} = GoogleSearchClient.get_html(keyword_upload.name)
 
     {:ok, _} = Keyword.insert_keyword_upload_html(keyword_upload, html_response)
 
