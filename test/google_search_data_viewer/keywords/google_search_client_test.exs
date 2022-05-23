@@ -5,7 +5,7 @@ defmodule GoogleSearchDataViewer.Keywords.GoogleSearchClientTest do
   alias GoogleSearchDataViewer.Keywords.GoogleSearchClient
 
   setup_all do
-    HTTPoison.start
+    HTTPoison.start()
   end
 
   describe "get_html/1" do
