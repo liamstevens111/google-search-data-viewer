@@ -63,6 +63,8 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
       user = insert(:user)
       keyword_upload = insert(:keyword_upload, name: "dog", user: user)
 
+      assert keyword_upload.status == :pending
+
       {_, keyword_upload_result} = Keyword.update_keyword_upload_status(keyword_upload, :inprogress)
 
       assert keyword_upload_result.status == :inprogress
