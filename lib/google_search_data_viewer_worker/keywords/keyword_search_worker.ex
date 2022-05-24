@@ -10,13 +10,12 @@ defmodule GoogleSearchDataViewerWorker.Keywords.SearchWorker do
   @max_attempts 3
 
   @impl Oban.Worker
-  def perform(%Oban.Job{args: %{"keyword_id" => keyword_id}, attempt: attempt})
-      when attempt == @max_attempts do
+  def perform(%Oban.Job{args: %{"keyword_id" => keyword_id}, attempt: @max_attempts}) do
     keyword_upload = Keyword.get_keyword_upload(keyword_id)
 
     {:ok, _} = Keyword.update_keyword_upload_status(keyword_upload, :failed)
 
-    {:error, "max attempts reached, attempt: #{attempt}"}
+    {:error, "max attempts reached, attempt: #{@max_attempts}"}
   end
 
   @impl Oban.Worker
