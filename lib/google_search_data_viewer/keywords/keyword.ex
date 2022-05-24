@@ -20,7 +20,7 @@ defmodule GoogleSearchDataViewer.Keywords.Keyword do
     |> Repo.update()
   end
 
-  def insert_keyword_upload_html(keyword_upload, html) do
+  def update_keyword_upload_html(keyword_upload, html) do
     keyword_upload
     |> KeywordUpload.html_changeset(%{html: html})
     |> Repo.update()

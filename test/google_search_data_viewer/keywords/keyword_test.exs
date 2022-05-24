@@ -69,14 +69,14 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
     end
   end
 
-  describe "insert_keyword_upload_html/2" do
-    test "given an existing uploaded keyword and a non-empty html value, inserts the html value" do
+  describe "update_keyword_upload_html/2" do
+    test "given an existing uploaded keyword and a non-empty html value, updates the html value" do
       user = insert(:user)
       keyword_upload = insert(:keyword_upload, name: "dog", user: user)
 
       html = "<html> </html>"
 
-      {_, keyword_upload_result} = Keyword.insert_keyword_upload_html(keyword_upload, html)
+      {_, keyword_upload_result} = Keyword.update_keyword_upload_html(keyword_upload, html)
 
       assert keyword_upload_result.html == html
     end

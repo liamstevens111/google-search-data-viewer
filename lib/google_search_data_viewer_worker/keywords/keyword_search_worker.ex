@@ -27,7 +27,7 @@ defmodule GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorker do
 
     {:ok, html_response} = GoogleSearchClient.get_html(keyword_upload.name)
 
-    {:ok, _} = Keyword.insert_keyword_upload_html(keyword_upload, html_response)
+    {:ok, _} = Keyword.update_keyword_upload_html(keyword_upload, html_response)
 
     :ok
   end
