@@ -38,7 +38,7 @@ defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUploadTest do
   end
 
   describe "html_changeset/2" do
-    test "given a changeset with html, validates" do
+    test "given a changeset with html, returns valid changeset" do
       user = build(:user)
       keyword_upload = build(:keyword_upload, name: "dog", user: user)
 
