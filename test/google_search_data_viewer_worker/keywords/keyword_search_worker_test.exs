@@ -1,7 +1,7 @@
-defmodule GoogleSearchDataViewerWorker.Keywords.SearchWorkerTest do
+defmodule GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorkerTest do
   use GoogleSearchDataViewer.DataCase, async: false
 
-  alias GoogleSearchDataViewerWorker.Keywords.SearchWorker
+  alias GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorker
 
   @max_attempts 3
 
@@ -15,7 +15,7 @@ defmodule GoogleSearchDataViewerWorker.Keywords.SearchWorkerTest do
         user = insert(:user)
         keyword_upload = insert(:keyword_upload, name: "iphone 12", user: user)
 
-        SearchWorker.perform(%Oban.Job{args: %{"keyword_id" => keyword_upload.id}})
+        KeywordSearchWorker.perform(%Oban.Job{args: %{"keyword_id" => keyword_upload.id}})
 
         keyword_upload_result = Repo.reload(keyword_upload)
 
@@ -28,7 +28,7 @@ defmodule GoogleSearchDataViewerWorker.Keywords.SearchWorkerTest do
         user = insert(:user)
         keyword_upload = insert(:keyword_upload, name: "iphone 12", user: user)
 
-        SearchWorker.perform(%Oban.Job{args: %{"keyword_id" => keyword_upload.id}})
+        KeywordSearchWorker.perform(%Oban.Job{args: %{"keyword_id" => keyword_upload.id}})
 
         keyword_upload_result = Repo.reload(keyword_upload)
 
@@ -41,7 +41,7 @@ defmodule GoogleSearchDataViewerWorker.Keywords.SearchWorkerTest do
         user = insert(:user)
         keyword_upload = insert(:keyword_upload, name: "iphone 12", user: user)
 
-        SearchWorker.perform(%Oban.Job{
+        KeywordSearchWorker.perform(%Oban.Job{
           args: %{"keyword_id" => keyword_upload.id},
           attempt: @max_attempts
         })

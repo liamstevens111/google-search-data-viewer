@@ -3,7 +3,7 @@ defmodule GoogleSearchDataViewerWorker.Keywords.JobCreationHelperTest do
   use GoogleSearchDataViewer.DataCase, async: true
 
   alias GoogleSearchDataViewerWorker.Keywords.JobCreationHelper
-  alias GoogleSearchDataViewerWorker.Keywords.SearchWorker
+  alias GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorker
 
   @job_delay 3
 
@@ -24,10 +24,10 @@ defmodule GoogleSearchDataViewerWorker.Keywords.JobCreationHelperTest do
 
       delayed_time = DateTime.add(DateTime.utc_now(), @job_delay, :second)
 
-      assert_enqueued(worker: SearchWorker, args: %{keyword_id: first_keyword_upload.id})
+      assert_enqueued(worker: KeywordSearchWorker, args: %{keyword_id: first_keyword_upload.id})
 
       assert_enqueued(
-        worker: SearchWorker,
+        worker: KeywordSearchWorker,
         scheduled_at: delayed_time,
         args: %{keyword_id: second_keyword_upload.id}
       )

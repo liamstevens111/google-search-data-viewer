@@ -1,4 +1,4 @@
-defmodule GoogleSearchDataViewerWorker.Keywords.SearchWorker do
+defmodule GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorker do
   use Oban.Worker,
     queue: :keyword_search,
     max_attempts: 3,
