@@ -41,7 +41,10 @@ defmodule GoogleSearchDataViewerWorker.Keywords.SearchWorkerTest do
         user = insert(:user)
         keyword_upload = insert(:keyword_upload, name: "iphone 12", user: user)
 
-        SearchWorker.perform(%Oban.Job{args: %{"keyword_id" => keyword_upload.id}, attempt: @max_attempts})
+        SearchWorker.perform(%Oban.Job{
+          args: %{"keyword_id" => keyword_upload.id},
+          attempt: @max_attempts
+        })
 
         keyword_upload_result = Repo.reload(keyword_upload)
 
