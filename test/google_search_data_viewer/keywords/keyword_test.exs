@@ -61,9 +61,7 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
   describe "update_keyword_upload_status/2" do
     test "given an existing uploaded keyword and a new status of inprogress, updates the status to inprogress" do
       user = insert(:user)
-      keyword_upload = insert(:keyword_upload, name: "dog", user: user)
-
-      assert keyword_upload.status == :pending
+      keyword_upload = insert(:keyword_upload, name: "dog", status: :pending, user: user)
 
       {_, keyword_upload_result} = Keyword.update_keyword_upload_status(keyword_upload, :inprogress)
 
