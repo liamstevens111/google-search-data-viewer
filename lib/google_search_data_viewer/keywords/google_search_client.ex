@@ -14,6 +14,9 @@ defmodule GoogleSearchDataViewer.Keywords.GoogleSearchClient do
 
       {:ok, %HTTPoison.Response{status_code: 500}} ->
         {:error, "Internal server error"}
+
+      {:ok, response = %HTTPoison.Response{status_code: _}} ->
+        {:error, response}
     end
   end
 end
