@@ -5,7 +5,7 @@ defmodule GoogleSearchDataViewerWorker.Keywords.JobCreationHelperTest do
   alias GoogleSearchDataViewerWorker.Keywords.JobCreationHelper
   alias GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorker
 
-  @job_delay 3
+  @job_delay_in_seconds 3
 
   describe "create_keyword_upload_jobs_with_delay/1" do
     test "given two uploaded keywords and a delay, jobs are created in the oban_jobs table scheduled for the correct times for two keyword ids" do
@@ -19,12 +19,15 @@ defmodule GoogleSearchDataViewerWorker.Keywords.JobCreationHelperTest do
           first_keyword_upload,
           second_keyword_upload
         ],
-        @job_delay
+        @job_delay_in_seconds
       )
 
-      delayed_time = DateTime.add(DateTime.utc_now(), @job_delay, :second)
+      delayed_time = DateTime.add(DateTime.utc_now(), @job_delay_in_seconds, :second)
 
-      assert_enqueued(worker: KeywordSearchWorker, args: %{keyword_id: first_keyword_upload.id})
+      assert_enqueued(
+        worker: KeywordSearchWorker,
+        args: %{keyword_id: first_keyword_upload.id}
+      )
 
       assert_enqueued(
         worker: KeywordSearchWorker,
