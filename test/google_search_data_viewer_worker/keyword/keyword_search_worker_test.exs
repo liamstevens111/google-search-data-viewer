@@ -1,7 +1,7 @@
-defmodule GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorkerTest do
+defmodule GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorkerTest do
   use GoogleSearchDataViewer.DataCase, async: false
 
-  alias GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorker
+  alias GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorker
 
   @max_attempts 3
 

@@ -1,6 +1,6 @@
 defmodule GoogleSearchDataViewer.KeywordUploadFactory do
   alias Faker.Food.En
-  alias GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload
+  alias GoogleSearchDataViewer.Keyword.Schemas.KeywordUpload
 
   defmacro __using__(_opts) do
     quote do

@@ -1,7 +1,7 @@
-defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUploadTest do
+defmodule GoogleSearchDataViewer.Keyword.Schemas.KeywordUploadTest do
   use GoogleSearchDataViewer.DataCase, async: true
 
-  alias GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload
+  alias GoogleSearchDataViewer.Keyword.Schemas.KeywordUpload
 
   describe "changeset/2" do
     test "given a changeset with keyword name and user id, returns valid changeset" do

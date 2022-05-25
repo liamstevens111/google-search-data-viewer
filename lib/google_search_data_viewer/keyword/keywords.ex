@@ -1,7 +1,7 @@
-defmodule GoogleSearchDataViewer.Keywords.Keyword do
+defmodule GoogleSearchDataViewer.Keyword.Keywords do
   import Ecto.Query, warn: false
 
-  alias GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload
+  alias GoogleSearchDataViewer.Keyword.Schemas.KeywordUpload
   alias GoogleSearchDataViewer.Repo
 
   def get_keyword_upload(id), do: Repo.get(KeywordUpload, id)

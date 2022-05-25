@@ -1,14 +1,14 @@
-defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
+defmodule GoogleSearchDataViewer.Keyword.KeywordsTest do
   use GoogleSearchDataViewer.DataCase, async: true
 
-  alias GoogleSearchDataViewer.Keywords.Keyword
+  alias GoogleSearchDataViewer.Keyword.Keywords
 
   describe "create_keyword_uploads/2" do
     test "given a valid list of keywords and a user, creates keywords for the user" do
       user = insert(:user)
       keywords = ["dog", "cat", "fish"]
 
-      {keyword_count, _keywords} = Keyword.create_keyword_uploads(keywords, user)
+      {keyword_count, _keywords} = Keywords.create_keyword_uploads(keywords, user)
 
       assert keyword_count == Enum.count(keywords)
     end
@@ -25,7 +25,7 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
 
       assert keyword_uploads ==
                user
-               |> Keyword.get_keyword_uploads_for_user()
+               |> Keywords.get_keyword_uploads_for_user()
                |> Repo.preload(:user)
     end
 
@@ -37,7 +37,7 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
 
       Enum.each(keywords, fn keyword -> insert(:keyword_upload, name: keyword, user: user1) end)
 
-      assert Keyword.get_keyword_uploads_for_user(user2) == []
+      assert Keywords.get_keyword_uploads_for_user(user2) == []
     end
   end
 
@@ -47,14 +47,14 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
       keyword_upload = insert(:keyword_upload, name: "dog", user: user)
 
       assert keyword_upload ==
-               keyword_upload.id |> Keyword.get_keyword_upload() |> Repo.preload(:user)
+               keyword_upload.id |> Keywords.get_keyword_upload() |> Repo.preload(:user)
     end
 
     test "with a non-existing uploaded keyword, returns nil" do
       user = insert(:user)
       insert(:keyword_upload, name: "dog", user: user)
 
-      assert Keyword.get_keyword_upload(-1) == nil
+      assert Keywords.get_keyword_upload(-1) == nil
     end
   end
 
@@ -63,7 +63,8 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
       user = insert(:user)
       keyword_upload = insert(:keyword_upload, name: "dog", status: :pending, user: user)
 
-      {_, keyword_upload_result} = Keyword.update_keyword_upload_status(keyword_upload, :inprogress)
+      {_, keyword_upload_result} =
+        Keywords.update_keyword_upload_status(keyword_upload, :inprogress)
 
       assert keyword_upload_result.status == :inprogress
     end
@@ -76,7 +77,7 @@ defmodule GoogleSearchDataViewer.Keywords.KeywordTest do
 
       html = "<html> </html>"
 
-      {_, keyword_upload_result} = Keyword.update_keyword_upload_html(keyword_upload, html)
+      {_, keyword_upload_result} = Keywords.update_keyword_upload_html(keyword_upload, html)
 
       assert keyword_upload_result.html == html
     end

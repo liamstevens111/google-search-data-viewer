@@ -1,9 +1,9 @@
 defmodule GoogleSearchDataViewer.UserFactory do
-  alias GoogleSearchDataViewer.Accounts.Schemas.User
+  alias GoogleSearchDataViewer.Account.Schemas.User
 
   defmacro __using__(_opts) do
     quote do
-      alias GoogleSearchDataViewer.Accounts.Passwords
+      alias GoogleSearchDataViewer.Account.Passwords
 
       def user_factory(attrs) do
         email = attrs[:email] || Faker.Internet.email()

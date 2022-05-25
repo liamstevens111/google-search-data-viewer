@@ -1,4 +1,4 @@
-defmodule GoogleSearchDataViewer.Keywords.GoogleSearchClient do
+defmodule GoogleSearchDataViewer.Keyword.GoogleSearchClient do
   @base_url "https://www.google.com/search?q="
   @headers [
     {"User-Agent",

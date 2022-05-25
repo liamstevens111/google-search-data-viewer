@@ -1,9 +1,9 @@
-defmodule GoogleSearchDataViewerWorker.Keywords.JobCreationHelperTest do
+defmodule GoogleSearchDataViewerWorker.Keyword.KeywordsTest do
   use Oban.Testing, repo: GoogleSearchDataViewer.Repo
   use GoogleSearchDataViewer.DataCase, async: true
 
-  alias GoogleSearchDataViewerWorker.Keywords.JobCreationHelper
-  alias GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorker
+  alias GoogleSearchDataViewerWorker.Keyword.Keywords
+  alias GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorker
 
   @job_delay_in_seconds 3
 
@@ -14,7 +14,7 @@ defmodule GoogleSearchDataViewerWorker.Keywords.JobCreationHelperTest do
       first_keyword_upload = insert(:keyword_upload, name: "dog", user: user)
       second_keyword_upload = insert(:keyword_upload, name: "cat", user: user)
 
-      JobCreationHelper.create_keyword_upload_jobs_with_delay(
+      Keywords.create_keyword_upload_jobs_with_delay(
         [
           first_keyword_upload,
           second_keyword_upload
