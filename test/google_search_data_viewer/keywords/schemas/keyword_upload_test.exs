@@ -36,4 +36,40 @@ defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUploadTest do
       assert errors_on(changeset) == %{user: ["does not exist"]}
     end
   end
+
+  describe "html_changeset/2" do
+    test "given a changeset with html, returns valid changeset" do
+      user = build(:user)
+      keyword_upload = build(:keyword_upload, name: "dog", user: user)
+
+      changes = %{html: "<html> </html>"}
+
+      html_changeset = KeywordUpload.html_changeset(keyword_upload, changes)
+
+      assert %Ecto.Changeset{valid?: true, changes: ^changes} = html_changeset
+    end
+
+    test "given a changeset with empty html, fails to validate" do
+      user = build(:user)
+      keyword_upload = build(:keyword_upload, name: "dog", user: user)
+
+      changes = %{html: ""}
+
+      html_changeset = KeywordUpload.html_changeset(keyword_upload, changes)
+
+      assert html_changeset.valid? == false
+      assert errors_on(html_changeset) == %{html: ["can't be blank"]}
+    end
+  end
+
+  describe "status_changeset/2" do
+    test "given a changeset with a valid status, changes the status" do
+      user = build(:user)
+      keyword_upload = build(:keyword_upload, name: "dog", user: user)
+
+      status_changeset = KeywordUpload.status_changeset(keyword_upload, :inprogress)
+
+      assert status_changeset.changes == %{status: :inprogress}
+    end
+  end
 end
