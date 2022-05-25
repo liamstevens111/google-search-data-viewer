@@ -20,5 +20,11 @@ defmodule GoogleSearchDataViewer.Keywords.GoogleSearchClientTest do
         assert {:error, "Internal server error"} = GoogleSearchClient.get_html("dog")
       end
     end
+
+    test "given a keyword and a server response with an unhandled status code 504, returns error and HTTPoison.Response" do
+      use_cassette :stub, url: "https://www.google.com/search?q=dog", status_code: 504 do
+        assert {:error, %HTTPoison.Response{}} = GoogleSearchClient.get_html("dog")
+      end
+    end
   end
 end
