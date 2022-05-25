@@ -8,8 +8,12 @@ defmodule GoogleSearchDataViewer.Keywords.GoogleSearchClient do
   def get_html(keyword) do
     search_url = @base_url <> URI.encode(keyword)
 
-    {:ok, response} = HTTPoison.get(search_url, @headers)
+    case HTTPoison.get(search_url, @headers) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        {:ok, body}
 
-    {:ok, response.body}
+      {:ok, %HTTPoison.Response{status_code: 500}} ->
+        {:error, "Internal server error"}
+    end
   end
 end
