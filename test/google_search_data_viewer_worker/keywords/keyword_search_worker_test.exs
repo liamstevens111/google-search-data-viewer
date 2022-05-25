@@ -46,9 +46,9 @@ defmodule GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorkerTest do
           attempt: @max_attempts
         })
 
-        keyword_upload_result = Repo.reload(keyword_upload)
+        %{status: keyword_status} = Repo.reload(keyword_upload)
 
-        assert keyword_upload_result.status == :failed
+        assert keyword_status == :failed
       end
     end
   end
