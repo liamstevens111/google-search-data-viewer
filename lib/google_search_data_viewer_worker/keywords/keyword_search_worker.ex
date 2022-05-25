@@ -21,9 +21,10 @@ defmodule GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorker do
 
   @impl Oban.Worker
   def perform(%Oban.Job{args: %{"keyword_id" => keyword_id}}) do
-    keyword_upload = Keyword.get_keyword_upload(keyword_id)
-
-    {:ok, _} = Keyword.update_keyword_upload_status(keyword_upload, :inprogress)
+    {_, keyword_upload} =
+      keyword_id
+      |> Keyword.get_keyword_upload()
+      |> Keyword.update_keyword_upload_status(:inprogress)
 
     {:ok, html_response} = GoogleSearchClient.get_html(keyword_upload.name)
 
