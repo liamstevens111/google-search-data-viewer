@@ -51,6 +51,7 @@ defmodule GoogleSearchDataViewer.MixProject do
       {:faker, "~> 0.17.0", [only: [:dev, :test], runtime: false]},
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.18"},
+      {:httpoison, "~> 1.8"},
       {:jason, "~> 1.2"},
       {:mimic, "~> 1.7.2", [only: :test]},
       {:nimble_csv, "~> 1.1"},
