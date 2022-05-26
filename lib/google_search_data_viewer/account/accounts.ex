@@ -1,8 +1,8 @@
-defmodule GoogleSearchDataViewer.Accounts.Account do
+defmodule GoogleSearchDataViewer.Account.Accounts do
   import Ecto.Query, warn: false
 
-  alias GoogleSearchDataViewer.Accounts.Passwords
-  alias GoogleSearchDataViewer.Accounts.Schemas.User
+  alias GoogleSearchDataViewer.Account.Passwords
+  alias GoogleSearchDataViewer.Account.Schemas.User
   alias GoogleSearchDataViewer.Repo
 
   def list_users, do: Repo.all(User)

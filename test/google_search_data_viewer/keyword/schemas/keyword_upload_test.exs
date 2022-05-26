@@ -1,7 +1,7 @@
-defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUploadTest do
+defmodule GoogleSearchDataViewer.Keyword.Schemas.KeywordUploadTest do
   use GoogleSearchDataViewer.DataCase, async: true
 
-  alias GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload
+  alias GoogleSearchDataViewer.Keyword.Schemas.KeywordUpload
 
   describe "changeset/2" do
     test "given a changeset with keyword name and user id, returns valid changeset" do
@@ -39,8 +39,7 @@ defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUploadTest do
 
   describe "html_changeset/2" do
     test "given a changeset with html, returns valid changeset" do
-      user = build(:user)
-      keyword_upload = build(:keyword_upload, name: "dog", user: user)
+      keyword_upload = build(:keyword_upload, name: "dog")
 
       changes = %{html: "<html> </html>"}
 
@@ -50,8 +49,7 @@ defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUploadTest do
     end
 
     test "given a changeset with empty html, fails to validate" do
-      user = build(:user)
-      keyword_upload = build(:keyword_upload, name: "dog", user: user)
+      keyword_upload = build(:keyword_upload, name: "dog")
 
       changes = %{html: ""}
 
@@ -64,8 +62,7 @@ defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUploadTest do
 
   describe "status_changeset/2" do
     test "given a changeset with a valid status, changes the status" do
-      user = build(:user)
-      keyword_upload = build(:keyword_upload, name: "dog", user: user)
+      keyword_upload = build(:keyword_upload, name: "dog")
 
       status_changeset = KeywordUpload.status_changeset(keyword_upload, :inprogress)
 

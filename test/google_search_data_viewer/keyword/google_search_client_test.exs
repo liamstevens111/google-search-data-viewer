@@ -1,8 +1,8 @@
-defmodule GoogleSearchDataViewer.Keywords.GoogleSearchClientTest do
+defmodule GoogleSearchDataViewer.Keyword.GoogleSearchClientTest do
   use ExUnit.Case, async: false
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
-  alias GoogleSearchDataViewer.Keywords.GoogleSearchClient
+  alias GoogleSearchDataViewer.Keyword.GoogleSearchClient
 
   setup_all do
     HTTPoison.start()

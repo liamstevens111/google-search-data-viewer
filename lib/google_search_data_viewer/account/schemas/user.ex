@@ -1,10 +1,10 @@
-defmodule GoogleSearchDataViewer.Accounts.Schemas.User do
+defmodule GoogleSearchDataViewer.Account.Schemas.User do
   use Ecto.Schema
 
   import Ecto.Changeset
 
-  alias GoogleSearchDataViewer.Accounts.Passwords
-  alias GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload
+  alias GoogleSearchDataViewer.Account.Passwords
+  alias GoogleSearchDataViewer.Keyword.Schemas.KeywordUpload
 
   schema "users" do
     field :email, :string

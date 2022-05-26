@@ -1,7 +1,7 @@
-defmodule GoogleSearchDataViewer.Accounts.Schemas.UserTest do
+defmodule GoogleSearchDataViewer.Account.Schemas.UserTest do
   use GoogleSearchDataViewer.DataCase, async: true
 
-  alias GoogleSearchDataViewer.Accounts.Schemas.User
+  alias GoogleSearchDataViewer.Account.Schemas.User
 
   describe "changeset/2" do
     test "given an empty changeset with empty fields, fails to validate" do

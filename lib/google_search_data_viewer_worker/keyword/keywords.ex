@@ -1,5 +1,5 @@
-defmodule GoogleSearchDataViewerWorker.Keywords.JobCreationHelper do
-  alias GoogleSearchDataViewerWorker.Keywords.KeywordSearchWorker
+defmodule GoogleSearchDataViewerWorker.Keyword.Keywords do
+  alias GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorker
 
   def create_keyword_upload_jobs_with_delay(keyword_uploads, delay \\ 3) do
     keyword_uploads

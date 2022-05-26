@@ -1,9 +1,9 @@
-defmodule GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload do
+defmodule GoogleSearchDataViewer.Keyword.Schemas.KeywordUpload do
   use Ecto.Schema
 
   import Ecto.Changeset
 
-  alias GoogleSearchDataViewer.Accounts.Schemas.User
+  alias GoogleSearchDataViewer.Account.Schemas.User
 
   schema "keyword_uploads" do
     field :name, :string
