@@ -43,7 +43,7 @@ defmodule GoogleSearchDataViewer.Keyword.Keywords do
     end)
     |> Enum.map(fn params -> create_changeset_and_parse(params) end)
     |> Enum.map(&Map.from_struct/1)
-    |> Enum.map(fn params -> Map.drop(params, [:__meta__, :user, :id]) end)
+    |> Enum.map(fn params -> Map.drop(params, [:__meta__, :user, :id, :search_result_url_data]) end)
     |> Enum.map(fn params -> insert_timestamps(params) end)
   end
 
