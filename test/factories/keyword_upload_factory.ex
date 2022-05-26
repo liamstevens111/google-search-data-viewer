@@ -4,15 +4,11 @@ defmodule GoogleSearchDataViewer.KeywordUploadFactory do
 
   defmacro __using__(_opts) do
     quote do
-      def keyword_upload_factory(attrs) do
-        name = attrs[:name] || En.dish()
-        user = attrs[:user]
-        status = attrs[:status] || :pending
-
+      def keyword_upload_factory do
         %KeywordUpload{
-          name: name,
-          user: user,
-          status: status
+          name: En.dish(),
+          status: :pending,
+          user: build(:user)
         }
       end
     end

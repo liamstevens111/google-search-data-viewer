@@ -9,10 +9,8 @@ defmodule GoogleSearchDataViewerWorker.Keyword.KeywordsTest do
 
   describe "create_keyword_upload_jobs_with_delay/1" do
     test "given two uploaded keywords and a delay, jobs are created in the oban_jobs table scheduled for the correct times for two keyword ids" do
-      user = insert(:user)
-
-      first_keyword_upload = insert(:keyword_upload, name: "dog", user: user)
-      second_keyword_upload = insert(:keyword_upload, name: "cat", user: user)
+      first_keyword_upload = insert(:keyword_upload, name: "dog")
+      second_keyword_upload = insert(:keyword_upload, name: "cat")
 
       Keywords.create_keyword_upload_jobs_with_delay(
         [
