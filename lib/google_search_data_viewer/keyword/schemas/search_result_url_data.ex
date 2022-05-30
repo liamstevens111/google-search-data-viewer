@@ -15,7 +15,6 @@ defmodule GoogleSearchDataViewer.Keyword.Schemas.SearchResultUrlData do
     timestamps()
   end
 
-  @doc false
   def changeset(search_result_url_data \\ %__MODULE__{}, attrs) do
     search_result_url_data
     |> cast(attrs, [:url, :is_adword, :is_top_adword, :keyword_upload_id])
