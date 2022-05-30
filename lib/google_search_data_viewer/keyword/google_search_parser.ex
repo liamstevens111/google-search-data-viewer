@@ -1,7 +1,7 @@
 defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParser do
   @css_search_selectors %{
     top_adwords: "#tads > .uEierd a.sVXRqc[href]",
-    top_sub_adwords: ".MhgNwc a[href]",
+    top_non_adwords: ".MhgNwc a[href]",
     non_adwords: ".yuRUbf a[href]",
     bottom_adwords: "#bottomads .uEierd a.sVXRqc[href]"
   }
@@ -12,7 +12,7 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParser do
     url_data =
       []
       |> prepend_top_adwords(parsed_html)
-      |> prepend_top_sub_adwords(parsed_html)
+      |> prepend_top_non_adwords(parsed_html)
       |> prepend_non_adwords(parsed_html)
       |> prepend_bottom_adwords(parsed_html)
 
@@ -29,10 +29,10 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParser do
       url_data
   end
 
-  defp prepend_top_sub_adwords(url_data, html) do
+  defp prepend_top_non_adwords(url_data, html) do
     Enum.map(
       html
-      |> Floki.find(@css_search_selectors.top_sub_adwords)
+      |> Floki.find(@css_search_selectors.top_non_adwords)
       |> Floki.attribute("href"),
       fn url -> %{url: url, is_adword: false, is_top_adword: false} end
     ) ++
