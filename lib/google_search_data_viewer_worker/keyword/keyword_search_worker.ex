@@ -5,7 +5,9 @@ defmodule GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorker do
     unique: [period: 30]
 
   alias GoogleSearchDataViewer.Keyword.GoogleSearchClient
+  alias GoogleSearchDataViewer.Keyword.GoogleSearchParser
   alias GoogleSearchDataViewer.Keyword.Keywords
+  alias GoogleSearchDataViewer.Keyword.SearchResults
 
   @max_attempts 3
 
@@ -29,6 +31,10 @@ defmodule GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorker do
     {:ok, html_response} = GoogleSearchClient.get_html(keyword_upload.name)
 
     {:ok, _} = Keywords.update_keyword_upload_html(keyword_upload, html_response)
+
+    GoogleSearchParser.get_url_data_from_html(html_response)
+    |> Enum.map(fn data -> Map.put(data, :keyword_upload_id, keyword_upload.id) end)
+    |> Enum.map(fn data -> SearchResults.create_search_results(data) end)
 
     :ok
   end
