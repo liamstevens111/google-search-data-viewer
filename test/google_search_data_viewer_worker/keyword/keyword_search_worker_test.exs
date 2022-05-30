@@ -10,7 +10,7 @@ defmodule GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorkerTest do
   end
 
   describe "perform/1" do
-    test "updates status to inprogress for the uploaded keyword" do
+    test "updates status from pending to completed for the uploaded keyword" do
       use_cassette "keywords/search_iphone12" do
         keyword_upload = insert(:keyword_upload, name: "iphone 12")
 
@@ -18,7 +18,7 @@ defmodule GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorkerTest do
 
         keyword_upload_result = Repo.reload(keyword_upload)
 
-        assert keyword_upload_result.status == :inprogress
+        assert keyword_upload_result.status == :completed
       end
     end
 
