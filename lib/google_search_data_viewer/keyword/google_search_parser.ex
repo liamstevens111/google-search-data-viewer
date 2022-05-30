@@ -21,7 +21,8 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParser do
 
   defp prepend_top_adwords(url_data, html) do
     Enum.map(
-      Floki.find(html, @css_search_selectors.top_adwords)
+      html
+      |> Floki.find(@css_search_selectors.top_adwords)
       |> Floki.attribute("href"),
       fn url -> %{url: url, is_adword: true, is_top_adword: true} end
     ) ++
@@ -30,7 +31,8 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParser do
 
   defp prepend_top_sub_adwords(url_data, html) do
     Enum.map(
-      Floki.find(html, @css_search_selectors.top_sub_adwords)
+      html
+      |> Floki.find(@css_search_selectors.top_sub_adwords)
       |> Floki.attribute("href"),
       fn url -> %{url: url, is_adword: false, is_top_adword: false} end
     ) ++
@@ -39,7 +41,8 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParser do
 
   defp prepend_non_adwords(url_data, html) do
     Enum.map(
-      Floki.find(html, @css_search_selectors.non_adwords)
+      html
+      |> Floki.find(@css_search_selectors.non_adwords)
       |> Floki.attribute("href"),
       fn url -> %{url: url, is_adword: false, is_top_adword: false} end
     ) ++
@@ -48,7 +51,8 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParser do
 
   defp prepend_bottom_adwords(url_data, html) do
     Enum.map(
-      Floki.find(html, @css_search_selectors.bottom_adwords)
+      html
+      |> Floki.find(@css_search_selectors.bottom_adwords)
       |> Floki.attribute("href"),
       fn url -> %{url: url, is_adword: true, is_top_adword: false} end
     ) ++
