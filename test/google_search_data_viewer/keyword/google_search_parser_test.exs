@@ -1,18 +1,8 @@
 defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParserTest do
-  use ExUnit.Case, async: false
-  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+  use GoogleSearchDataViewer.DataCase, async: false
 
   alias GoogleSearchDataViewer.Keyword.GoogleSearchClient
   alias GoogleSearchDataViewer.Keyword.GoogleSearchParser
-
-  setup do
-    ExVCR.Config.cassette_library_dir(
-      "test/support/fixtures/vcr_cassettes/keywords",
-      "test/support/fixtures/vcr_cassettes/keywords/custom"
-    )
-
-    :ok
-  end
 
   describe "get_url_statistics/1" do
     test "given a HTML response that contains a top adword, returns the URL" do
