@@ -1,11 +1,11 @@
-defmodule GoogleSearchDataViewer.SearchResultUrlDataFactory do
+defmodule GoogleSearchDataViewer.SearchResultUrlFactory do
   alias Faker
-  alias GoogleSearchDataViewer.Keyword.Schemas.SearchResultUrlData
+  alias GoogleSearchDataViewer.Keyword.Schemas.SearchResultUrl
 
   defmacro __using__(_opts) do
     quote do
-      def search_result_url_data_factory do
-        %SearchResultUrlData{
+      def search_result_url_factory do
+        %SearchResultUrl{
           url: Faker.Internet.url(),
           is_adword: false,
           is_top_adword: false,

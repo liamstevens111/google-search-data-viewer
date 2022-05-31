@@ -35,8 +35,8 @@ defmodule GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorker do
     html_response
     |> GoogleSearchParser.get_url_data_from_html()
     |> Enum.map(fn url_data -> Map.put(url_data, :keyword_upload_id, keyword_upload.id) end)
-    |> Enum.each(fn search_result_url_data ->
-      SearchResults.create_search_results(search_result_url_data)
+    |> Enum.each(fn search_result_url ->
+      SearchResults.create_search_results(search_result_url)
     end)
 
     Keywords.update_keyword_upload_status(keyword_upload, :completed)

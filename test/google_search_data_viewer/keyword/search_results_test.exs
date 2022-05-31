@@ -7,14 +7,14 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
     test "given valid search result data, creates search result data for a keyword upload" do
       keyword_upload = insert(:keyword_upload)
 
-      search_result_url_data = %{
+      search_result_url = %{
         url: "www.google.com",
         is_top_adword: false,
         is_adword: true,
         keyword_upload_id: keyword_upload.id
       }
 
-      {:ok, search_result} = SearchResults.create_search_results(search_result_url_data)
+      {:ok, search_result} = SearchResults.create_search_results(search_result_url)
 
       assert search_result.url == "www.google.com"
       assert search_result.is_top_adword == false
@@ -25,14 +25,14 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
     test "given an empty url, returns an error" do
       keyword_upload = insert(:keyword_upload)
 
-      search_result_url_data = %{
+      search_result_url = %{
         url: "",
         is_top_adword: false,
         is_adword: true,
         keyword_upload_id: keyword_upload.id
       }
 
-      {:error, changeset} = SearchResults.create_search_results(search_result_url_data)
+      {:error, changeset} = SearchResults.create_search_results(search_result_url)
 
       assert errors_on(changeset) == %{
                url: ["can't be blank"]
@@ -40,14 +40,14 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
     end
 
     test "given an invalid keyword upload, returns an error" do
-      search_result_url_data = %{
+      search_result_url = %{
         url: "www.google.com",
         is_top_adword: false,
         is_adword: true,
         keyword_upload_id: -1
       }
 
-      {:error, changeset} = SearchResults.create_search_results(search_result_url_data)
+      {:error, changeset} = SearchResults.create_search_results(search_result_url)
 
       assert errors_on(changeset) == %{
                keyword_upload: ["does not exist"]
