@@ -28,7 +28,7 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParserTest do
     end
   end
 
-  test "given a HTML response that contains no ads, returns the empty list of URL data" do
+  test "given a HTML response that contains no ads, returns list of URL data with no ads" do
     use_cassette "search_dog", custom: true do
       {:ok, html_response} = GoogleSearchClient.get_html("dog")
 
