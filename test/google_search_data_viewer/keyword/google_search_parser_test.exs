@@ -6,7 +6,7 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParserTest do
 
   describe "get_url_statistics/1" do
     test "given a HTML response that contains a top adword, returns the URL" do
-      use_cassette "search_buy_nike_shoes", custom: true do
+      use_cassette "search_buy_nike_shoes" do
         {:ok, html_response} = GoogleSearchClient.get_html("buy nike shoes")
 
         url_stats_results = GoogleSearchParser.get_url_statistics(html_response)
@@ -34,7 +34,7 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParserTest do
     end
 
     test "given a HTML response that contains no adwords, returns list of URL data with no adwords" do
-      use_cassette "search_dog", custom: true do
+      use_cassette "search_dog" do
         {:ok, html_response} = GoogleSearchClient.get_html("dog")
 
         url_stats_results = GoogleSearchParser.get_url_statistics(html_response)

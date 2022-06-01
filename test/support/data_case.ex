@@ -37,10 +37,7 @@ defmodule GoogleSearchDataViewer.DataCase do
   setup tags do
     HTTPoison.start()
 
-    ExVCR.Config.cassette_library_dir(
-      "test/support/fixtures/vcr_cassettes/",
-      "test/support/fixtures/vcr_cassettes/custom"
-    )
+    ExVCR.Config.cassette_library_dir("test/support/fixtures/vcr_cassettes/")
 
     pid = Sandbox.start_owner!(GoogleSearchDataViewer.Repo, shared: not tags[:async])
     on_exit(fn -> Sandbox.stop_owner(pid) end)
