@@ -1,4 +1,4 @@
-<div class="w-full max-w-md">
+<div class="form-control w-full max-w-md">
   <.form let={f} for={@changeset} action={@action}>
     <%= if @changeset.action do %>
       <div class="alert alert-danger">
@@ -8,7 +8,7 @@
 
     <div class="my-5">
       <%= label f, :email, class: "label" %>
-      <%= email_input f, :email, required: true, class: "input input-bordered pr-40 bg-gray-200 text-black w-full max-w-md" %>
+      <%= email_input f, :email, required: true, class: "input input-bordered bg-gray-200 text-black w-full max-w-md" %>
     </div>
     <%= error_tag f, :email %>
 
