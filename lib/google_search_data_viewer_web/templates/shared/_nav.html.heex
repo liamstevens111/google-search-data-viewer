@@ -1,0 +1,17 @@
+<nav class="navbar mb-10 shadow-lg bg-neutral">
+  <div class="navbar-start ml-8">
+    <%= link "Google Search Data Viewer", class: "text-lg font-bold", to: Routes.page_path(@conn, :index)%>
+    <%= if @current_user do %>
+      <%= link "Keywords", class: "btn btn-sm btn-info ml-12", to: Routes.keyword_path(@conn, :index), method: :get %>
+    <% end %>
+  </div>
+  <div class="navbar-end mr-8">
+    <%= if @current_user do %>
+      <p class="ml-5"> Signed in as <%= @current_user.email %> </p>
+      <%= link "Sign out", class: "btn btn-sm btn-ghost ml-5", to: Routes.session_path(@conn, :delete, @current_user), method: :delete %>
+    <% else %>
+      <%= link "Sign up", class: "btn btn-sm btn-ghost ml-5", to: Routes.user_path(@conn, :new), method: :get %>
+      <%= link "Sign in", class: "btn btn-sm btn-ghost ml-5", to: Routes.session_path(@conn, :new), method: :get %>
+    <% end %>
+  </div>
+</nav>
