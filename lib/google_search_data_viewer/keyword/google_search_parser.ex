@@ -1,9 +1,9 @@
 defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParser do
   @css_search_selectors %{
-    top_adwords: "#tads > .uEierd a.sVXRqc[href]",
-    top_non_adwords: ".MhgNwc a[href]",
-    non_adwords: ".yuRUbf a[href]",
-    bottom_adwords: "#bottomads .uEierd a.sVXRqc[href]"
+    top_adwords: "#tads > .uEierd a.sVXRqc",
+    top_non_adwords: ".MhgNwc a",
+    non_adwords: ".yuRUbf a",
+    bottom_adwords: "#bottomads .uEierd a.sVXRqc"
   }
 
   def get_url_statistics(html) do
