@@ -17,50 +17,34 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParser do
   end
 
   defp prepend_top_adwords(url_stats, parsed_html) do
-    urls =
-      parsed_html
-      |> Floki.find(@css_search_selectors.top_adwords)
-      |> Floki.attribute("href")
-
-    Enum.map(
-      urls,
-      fn url -> %{url: url, is_adword: true, is_top_adword: true} end
-    ) ++ url_stats
+    parsed_html
+    |> Floki.find(@css_search_selectors.top_adwords)
+    |> Floki.attribute("href")
+    |> Enum.map(fn url -> %{url: url, is_adword: true, is_top_adword: true} end)
+    |> Enum.concat(url_stats)
   end
 
   defp prepend_top_non_adwords(url_stats, parsed_html) do
-    urls =
-      parsed_html
-      |> Floki.find(@css_search_selectors.top_non_adwords)
-      |> Floki.attribute("href")
-
-    Enum.map(
-      urls,
-      fn url -> %{url: url, is_adword: false, is_top_adword: false} end
-    ) ++ url_stats
+    parsed_html
+    |> Floki.find(@css_search_selectors.top_non_adwords)
+    |> Floki.attribute("href")
+    |> Enum.map(fn url -> %{url: url, is_adword: false, is_top_adword: false} end)
+    |> Enum.concat(url_stats)
   end
 
   defp prepend_non_adwords(url_stats, parsed_html) do
-    urls =
-      parsed_html
-      |> Floki.find(@css_search_selectors.non_adwords)
-      |> Floki.attribute("href")
-
-    Enum.map(
-      urls,
-      fn url -> %{url: url, is_adword: false, is_top_adword: false} end
-    ) ++ url_stats
+    parsed_html
+    |> Floki.find(@css_search_selectors.non_adwords)
+    |> Floki.attribute("href")
+    |> Enum.map(fn url -> %{url: url, is_adword: false, is_top_adword: false} end)
+    |> Enum.concat(url_stats)
   end
 
   defp prepend_bottom_adwords(url_stats, parsed_html) do
-    urls =
-      parsed_html
-      |> Floki.find(@css_search_selectors.bottom_adwords)
-      |> Floki.attribute("href")
-
-    Enum.map(
-      urls,
-      fn url -> %{url: url, is_adword: true, is_top_adword: false} end
-    ) ++ url_stats
+    parsed_html
+    |> Floki.find(@css_search_selectors.bottom_adwords)
+    |> Floki.attribute("href")
+    |> Enum.map(fn url -> %{url: url, is_adword: true, is_top_adword: false} end)
+    |> Enum.concat(url_stats)
   end
 end
