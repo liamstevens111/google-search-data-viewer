@@ -25,7 +25,8 @@ config :google_search_data_viewer, GoogleSearchDataViewerWeb.Endpoint,
   secret_key_base: "SActK/gZplr6QUPMRzVwcredt+1z4qXSGUwPRzDHmCtwbaVSXq3MOc3s6In1mX34",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
