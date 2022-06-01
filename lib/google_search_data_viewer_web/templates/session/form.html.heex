@@ -1,14 +1,19 @@
-<.form id="login-form" let={f} for={@conn} action={@action}>
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-  <%= error_tag f, :email %>
+<div class="w-full max-w-md">
+  <.form id="login-form" let={f} for={@conn} action={@action}>
+    <div class="my-5">
+      <%= label f, :email, class: "label" %>
+      <%= email_input f, :email, required: true, class: "input input-bordered pr-40 bg-gray-200 text-black w-full max-w-md" %>
+    </div>
+    <%= error_tag f, :email %>
 
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
+    <div class="my-5">
+      <%= label f, :password, class: "label" %>
+      <%= password_input f, :password, required: true, class: "input input-bordered pr-40 bg-gray-200 text-black w-full max-w-md" %>
+    </div>
+    <%= error_tag f, :password %>
 
-  <div>
-    <%= submit "Sign in" %>
-  </div>
-</.form>
-
+    <div>
+      <%= submit "Sign in", class: "btn my-5" %>
+    </div>
+  </.form>
+</div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en", data-theme="dark">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -11,10 +11,29 @@
   </head>
   <body>
     <header>
-      <section class="container">
-      
-      </section>
+      <nav class="navbar mb-10 shadow-lg bg-neutral ">
+        <div class="container mx-auto">
+          <div class="text-lg font-bold"> <%= link "Google Search Data Viewer", to: Routes.page_path(@conn, :index)%> </div>
+              <div class="flex-1 px-2 mx-2">
+            <%= if @current_user do %>
+                <div><%= link "Keywords", to: Routes.keyword_path(@conn, :index), method: :get %></div>
+            <% end %>
+              </div>
+
+            <div class="flex justify-end">
+              <%= if @current_user do %>
+                <div class="px-2 mx-2">Signed in as <%= @current_user.email %></div>
+                <div class="px-2 mx-2"><%= link "Sign out", to: Routes.session_path(@conn, :delete, @current_user), method: :delete %></div>
+          
+              <% else %>
+                <div class="btn btn-ghost btn-sm rounded-btn"><%= link "Sign up", to: Routes.user_path(@conn, :new), method: :get %></div>
+                <div class="btn btn-ghost btn-sm rounded-btn"><%= link "Sign in", to: Routes.session_path(@conn, :new), method: :get %></div>
+              <% end %>
+            </div>
+          </div>
+        </nav>
     </header>
     <%= @inner_content %>
   </body>
 </html>
+

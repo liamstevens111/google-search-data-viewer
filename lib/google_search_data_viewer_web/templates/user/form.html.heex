@@ -1,19 +1,25 @@
-<.form let={f} for={@changeset} action={@action}>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+<div class="w-full max-w-md">
+  <.form let={f} for={@changeset} action={@action}>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <div class="my-5">
+      <%= label f, :email, class: "label" %>
+      <%= email_input f, :email, required: true, class: "input input-bordered pr-40 bg-gray-200 text-black w-full max-w-md" %>
     </div>
-  <% end %>
+    <%= error_tag f, :email %>
 
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-  <%= error_tag f, :email %>
+    <div class="my-5">
+      <%= label f, :password, class: "label" %>
+      <%= password_input f, :password, required: true, class: "input input-bordered bg-gray-200 text-black w-full max-w-md" %>
+    </div>
+    <%= error_tag f, :password %>
 
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
-
-  <div>
-    <%= submit "Sign up" %>
-  </div>
-</.form>
+    <div>
+      <%= submit "Sign up", class: "btn my-5" %>
+    </div>
+  </.form>
+</div>

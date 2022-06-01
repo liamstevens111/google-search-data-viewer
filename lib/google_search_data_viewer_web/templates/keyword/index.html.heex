@@ -6,12 +6,12 @@
   <%= render "form.html", Map.put(assigns, :action, Routes.keyword_path(@conn, :upload)) %>
 
   <h3>Keywords</h3>
-  <div>
-    <table>
+  <div class="overflow-x-auto">
+    <table class="table-auto table table-zebra w-full">
       <tr>
-        <th>Keyword</th>
-        <th>Status</th>
-        <th>Uploaded at</th>
+        <th class="text-blue-400 font-medium">Keyword</th>
+        <th class="text-blue-400 font-medium">Status</th>
+        <th class="text-blue-400 font-medium">Uploaded at</th>
       </tr>
       <%= for keyword <- @keywords do %>
         <tr>
