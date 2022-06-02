@@ -38,3 +38,7 @@ google_search_data_viewer-*.tar
 npm-debug.log
 /assets/node_modules/
 
+.DS_Store
+
+# Ignore .iex.exs files in case you like to edit your preload commands locally.
+.iex.exs

@@ -1,16 +1,14 @@
 defmodule GoogleSearchDataViewer.KeywordUploadFactory do
-  alias Faker.Food.En
-  alias GoogleSearchDataViewer.Keywords.Schemas.KeywordUpload
+  alias Faker.Food
+  alias GoogleSearchDataViewer.Keyword.Schemas.KeywordUpload
 
   defmacro __using__(_opts) do
     quote do
-      def keyword_upload_factory(attrs) do
-        name = attrs[:name] || En.dish()
-        user = attrs[:user]
-
+      def keyword_upload_factory do
         %KeywordUpload{
-          name: name,
-          user: user
+          name: Food.En.dish(),
+          status: :pending,
+          user: build(:user)
         }
       end
     end
