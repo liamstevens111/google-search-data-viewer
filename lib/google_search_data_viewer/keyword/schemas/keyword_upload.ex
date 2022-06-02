@@ -4,6 +4,7 @@ defmodule GoogleSearchDataViewer.Keyword.Schemas.KeywordUpload do
   import Ecto.Changeset
 
   alias GoogleSearchDataViewer.Account.Schemas.User
+  alias GoogleSearchDataViewer.Keyword.Schemas.SearchResultUrl
 
   schema "keyword_uploads" do
     field :name, :string
@@ -13,6 +14,7 @@ defmodule GoogleSearchDataViewer.Keyword.Schemas.KeywordUpload do
       values: [:pending, :inprogress, :completed, :failed],
       default: :pending
 
+    has_many :search_result_urls, SearchResultUrl
     belongs_to :user, User
 
     timestamps()

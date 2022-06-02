@@ -10,21 +10,21 @@ defmodule GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorkerTest do
   end
 
   describe "perform/1" do
-    test "updates status to inprogress for the uploaded keyword" do
-      use_cassette "keywords/search_iphone12" do
-        keyword_upload = insert(:keyword_upload, name: "iphone 12")
+    test "updates status from pending to completed for the uploaded keyword" do
+      use_cassette "keyword_with_adword" do
+        keyword_upload = insert(:keyword_upload, name: "samsung galaxy s21")
 
         KeywordSearchWorker.perform(%Oban.Job{args: %{"keyword_id" => keyword_upload.id}})
 
         keyword_upload_result = Repo.reload(keyword_upload)
 
-        assert keyword_upload_result.status == :inprogress
+        assert keyword_upload_result.status == :completed
       end
     end
 
     test "inserts html into the uploaded keyword" do
-      use_cassette "keywords/search_iphone12" do
-        keyword_upload = insert(:keyword_upload, name: "iphone 12")
+      use_cassette "keyword_without_adword" do
+        keyword_upload = insert(:keyword_upload, name: "dog")
 
         KeywordSearchWorker.perform(%Oban.Job{args: %{"keyword_id" => keyword_upload.id}})
 
@@ -35,8 +35,8 @@ defmodule GoogleSearchDataViewerWorker.Keyword.KeywordSearchWorkerTest do
     end
 
     test "updates status to failed when max attempts have been reached" do
-      use_cassette "keywords/search_iphone12" do
-        keyword_upload = insert(:keyword_upload, name: "iphone 12")
+      use_cassette "keyword_without_adword" do
+        keyword_upload = insert(:keyword_upload, name: "dog")
 
         KeywordSearchWorker.perform(%Oban.Job{
           args: %{"keyword_id" => keyword_upload.id},
