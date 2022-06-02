@@ -6,7 +6,7 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchParser do
     bottom_adwords: "#bottomads .uEierd a.sVXRqc"
   }
 
-  def get_url_statistics(html) do
+  def parse_html_urls(html) do
     {_, parsed_html} = Floki.parse_document(html)
 
     []
