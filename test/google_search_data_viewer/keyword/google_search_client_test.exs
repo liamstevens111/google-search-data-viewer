@@ -5,7 +5,7 @@ defmodule GoogleSearchDataViewer.Keyword.GoogleSearchClientTest do
 
   describe "get_html/1" do
     test "given a keyword, returns ok and body" do
-      use_cassette "search_dog" do
+      use_cassette "keyword_without_adword" do
         assert {:ok, _html_response} = GoogleSearchClient.get_html("dog")
       end
     end
