@@ -1,16 +1,21 @@
 defmodule GoogleSearchDataViewer.Keyword.Keywords do
   import Ecto.Query, warn: false
 
+  alias GoogleSearchDataViewer.Keyword.Queries.KeywordsQuery
   alias GoogleSearchDataViewer.Keyword.Schemas.KeywordUpload
   alias GoogleSearchDataViewer.Repo
 
   def get_keyword_upload(id), do: Repo.get(KeywordUpload, id)
 
+  def get_keyword_upload_with_search_results(id) do
+    id
+    |> KeywordsQuery.list_for_keyword_with_search_results()
+    |> Repo.all()
+  end
+
   def get_keyword_uploads_for_user(user) do
-    KeywordUpload
-    |> where(user_id: ^user.id)
-    |> order_by(desc: :inserted_at)
-    |> select([:id, :user_id, :name, :status, :updated_at, :inserted_at])
+    user.id
+    |> KeywordsQuery.list_for_user()
     |> Repo.all()
   end
 
