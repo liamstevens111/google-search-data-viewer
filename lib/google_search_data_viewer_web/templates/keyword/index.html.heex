@@ -1,17 +1,16 @@
-<section class="phx-hero">
-  <h1>Keywords</h1>
+<section class="flex flex-col">
+  <h1 class="text-2xl text-center">Keywords</h1>
 
   <h3>Select a csv file to upload keywords.</h3>
   <h3>Maximum keywords per file: 1000</h3>
   <%= render "form.html", Map.put(assigns, :action, Routes.keyword_path(@conn, :upload)) %>
 
-  <h3>Keywords</h3>
-  <div>
-    <table>
+  <div class="overflow-x-auto">
+    <table class="table-auto table table-zebra w-full">
       <tr>
-        <th>Keyword</th>
-        <th>Status</th>
-        <th>Uploaded at</th>
+        <th class="text-blue-400 font-medium">Keyword</th>
+        <th class="text-blue-400 font-medium">Status</th>
+        <th class="text-blue-400 font-medium">Uploaded at</th>
       </tr>
       <%= for keyword <- @keywords do %>
         <tr>

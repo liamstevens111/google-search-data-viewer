@@ -10,17 +10,18 @@
     "eslint.fix": "eslint --color --fix ./"
   },
   "dependencies": {
-    "core-js": "^3.21.1"
+    "core-js": "^3.21.1",
+    "daisyui": "^2.15.2"
   },
   "devDependencies": {
-    "svg-sprite": "^1.5.4",
-    "stylelint": "^14.5.3",
-    "stylelint-config-property-sort-order-smacss": "^9.0.0",
-    "stylelint-config-sass-guidelines": "^9.0.1",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "2.5.1",
-    "prettier-plugin-eex": "^0.5.0"
+    "prettier-plugin-eex": "^0.5.0",
+    "stylelint": "^14.5.3",
+    "stylelint-config-property-sort-order-smacss": "^9.0.0",
+    "stylelint-config-sass-guidelines": "^9.0.1",
+    "svg-sprite": "^1.5.4"
   }
 }

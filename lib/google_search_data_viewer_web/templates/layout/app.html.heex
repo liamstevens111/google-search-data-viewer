@@ -1,17 +1,4 @@
-<main class="container">
-  <nav>
-    <ul>
-      <%= if @current_user do %>
-        <li>Signed in as <%= @current_user.email %></li>
-        <li><%= link "Sign out", to: Routes.session_path(@conn, :delete, @current_user), method: :delete %></li>
-        <li><%= link "Keywords", to: Routes.keyword_path(@conn, :index), method: :get %></li>
-      <% else %>
-        <li><%= link "Sign up", to: Routes.user_path(@conn, :new), method: :get %></li> 
-        <li><%= link "Sign in", to: Routes.session_path(@conn, :new), method: :get %></li>
-      <% end %>
-    </ul>
-  </nav>
-
+<main class="container mx-auto">
   <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
   <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
   <%= @inner_content %>
