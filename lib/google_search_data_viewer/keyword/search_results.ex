@@ -1,5 +1,4 @@
 defmodule GoogleSearchDataViewer.Keyword.SearchResults do
-  alias GoogleSearchDataViewer.Keyword.Queries.KeywordsQuery
   alias GoogleSearchDataViewer.Keyword.Schemas.SearchResultUrl
   alias GoogleSearchDataViewer.Repo
 
@@ -9,36 +8,19 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResults do
     |> Repo.insert()
   end
 
-  def get_report_for_keyword_upload(keyword_upload_id) do
-    keyword_upload_query = KeywordsQuery.list_for_keyword_with_search_results(keyword_upload_id)
-
-    keyword_upload_urls_summary =
-      keyword_upload_query
-      |> KeywordsQuery.url_stats_by_search_results()
-      |> Repo.all()
-      |> Enum.map(fn summary -> add_name_to_url_row_summary(summary) end)
-
-    keyword_upload = Repo.all(keyword_upload_query)
-
-    %{
-      keyword_upload: keyword_upload,
-      keyword_upload_url_summary: keyword_upload_urls_summary
-    }
+  def group_by_adword_types(search_result_urls) do
+    search_result_urls
+    |> Enum.group_by(&{&1.is_adword, &1.is_top_adword})
+    |> Enum.map(&add_adword_type_from_group/1)
+    |> Map.new()
   end
 
-  defp add_name_to_url_row_summary(%{is_adword: nil, is_top_adword: nil, count: count}) do
-    %{total_links: count}
-  end
+  defp add_adword_type_from_group({{true, true}, search_result_urls}),
+    do: {:top_adwords, search_result_urls}
 
-  defp add_name_to_url_row_summary(%{is_adword: true, is_top_adword: true, count: count}) do
-    %{total_top_adwords: count}
-  end
+  defp add_adword_type_from_group({{false, false}, search_result_urls}),
+    do: {:non_adwords, search_result_urls}
 
-  defp add_name_to_url_row_summary(%{is_adword: false, is_top_adword: false, count: count}) do
-    %{total_non_adwords: count}
-  end
-
-  defp add_name_to_url_row_summary(%{is_adword: true, is_top_adword: false, count: count}) do
-    %{total_adwords: count}
-  end
+  defp add_adword_type_from_group({{true, false}, search_result_urls}),
+    do: {:adwords, search_result_urls}
 end
