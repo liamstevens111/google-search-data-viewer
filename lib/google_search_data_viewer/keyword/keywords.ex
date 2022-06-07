@@ -7,16 +7,16 @@ defmodule GoogleSearchDataViewer.Keyword.Keywords do
 
   def get_keyword_upload(id), do: Repo.get(KeywordUpload, id)
 
-  def get_keyword_uploads_for_user(user) do
-    user.id
-    |> KeywordsQuery.list_for_user()
-    |> Repo.all()
-  end
-
   def get_keyword_upload_with_search_results(keyword_upload_id) do
     keyword_upload_id
     |> KeywordsQuery.get_keyword_upload_with_search_results()
     |> Repo.one()
+  end
+
+  def get_keyword_uploads_for_user(user) do
+    user.id
+    |> KeywordsQuery.list_for_user()
+    |> Repo.all()
   end
 
   def update_keyword_upload_status(keyword_upload, status) do
