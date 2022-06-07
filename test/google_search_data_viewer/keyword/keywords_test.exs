@@ -50,6 +50,29 @@ defmodule GoogleSearchDataViewer.Keyword.KeywordsTest do
     end
   end
 
+  describe "get_keyword_upload_with_search_results/1" do
+    test "with an existing uploaded keyword and search results, returns the keyword upload with search results for the given id" do
+      keyword_upload = insert(:keyword_upload)
+
+      insert_list(3, :search_result_url, keyword_upload: keyword_upload)
+
+      keyword_upload_result = Keywords.get_keyword_upload_with_search_results(keyword_upload.id)
+
+      assert Enum.count(keyword_upload_result.search_result_urls) == 3
+    end
+
+    test "with an existing uploaded keyword and no search results, returns the keyword upload with search results as an empty list for the given id" do
+      keyword_upload = insert(:keyword_upload)
+      other_keyword_upload = insert(:keyword_upload)
+
+      insert_list(3, :search_result_url, keyword_upload: other_keyword_upload)
+
+      keyword_upload_result = Keywords.get_keyword_upload_with_search_results(keyword_upload.id)
+
+      assert Enum.empty?(keyword_upload_result.search_result_urls)
+    end
+  end
+
   describe "update_keyword_upload_status/2" do
     test "given an existing uploaded keyword and a new status of inprogress, updates the status to inprogress" do
       keyword_upload = insert(:keyword_upload, name: "dog", status: :pending)
