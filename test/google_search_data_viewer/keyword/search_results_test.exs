@@ -76,12 +76,13 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
     test "given SearchResultUrls with one URL that is an adword, returns a Map with one adword with the key adwords" do
       keyword_upload = insert(:keyword_upload)
 
-      search_results =
-        insert_list(1, :search_result_url,
+      search_results = [
+        insert(:search_result_url,
           is_adword: true,
           is_top_adword: false,
           keyword_upload: keyword_upload
         )
+      ]
 
       result = SearchResults.group_by_adword_types(search_results)
 
