@@ -8,10 +8,4 @@ defmodule GoogleSearchDataViewer.Keyword.Queries.KeywordsQuery do
     |> where(user_id: ^user_id)
     |> order_by(desc: :inserted_at)
   end
-
-  def get_keyword_upload_with_search_results(keyword_upload_id) do
-    KeywordUpload
-    |> preload(:search_result_urls)
-    |> where([keyword], keyword.id == ^keyword_upload_id)
-  end
 end

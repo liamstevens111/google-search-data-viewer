@@ -9,8 +9,8 @@ defmodule GoogleSearchDataViewer.Keyword.Keywords do
 
   def get_keyword_upload_with_search_results(keyword_upload_id) do
     keyword_upload_id
-    |> KeywordsQuery.get_keyword_upload_with_search_results()
-    |> Repo.one()
+    |> get_keyword_upload()
+    |> Repo.preload(:search_result_urls)
   end
 
   def get_keyword_uploads_for_user(user) do
