@@ -65,7 +65,7 @@ defmodule GoogleSearchDataViewer.Keyword.KeywordsTest do
       keyword_upload = insert(:keyword_upload)
       other_keyword_upload = insert(:keyword_upload)
 
-      insert_list(3, :search_result_url, keyword_upload: other_keyword_upload)
+      insert(:search_result_url, keyword_upload: other_keyword_upload)
 
       keyword_upload_result = Keywords.get_keyword_upload_with_search_results(keyword_upload.id)
 
