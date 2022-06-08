@@ -7,7 +7,6 @@ defmodule GoogleSearchDataViewer.Keyword.Queries.KeywordsQuery do
     KeywordUpload
     |> where(user_id: ^user_id)
     |> order_by(desc: :inserted_at)
-    |> select([:id, :user_id, :name, :status, :updated_at, :inserted_at])
   end
 
   def get_keyword_upload_with_search_results(keyword_upload_id) do
