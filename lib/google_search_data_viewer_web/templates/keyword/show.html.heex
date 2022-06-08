@@ -1,0 +1,69 @@
+<section class="flex flex-col items-center justify-center gap-10">
+  <h1 class="text-2xl text-center"><%= @keyword_upload.name %></h1>
+
+  <label for="html-modal" class="btn modal-button">Show HTML</label>
+  <input type="checkbox" id="html-modal" class="modal-toggle" />
+  <label for="html-modal" class="modal cursor-pointer">
+    <label class="modal-box w-11/12 max-w-5xl" for="">
+      <%= @keyword_upload.html %>
+    </label>
+  </label>
+
+  <div class="card w-96 bg-neutral text-neutral-content">
+    <div class="card-body items-center text-center">
+      <h2 class="card-title">Summary</h2>
+      <p>Total links: <%= total_urls(@search_results) %> </p>
+      <p>Total Top Adwords: <%= total_top_adword_urls(@search_results) %> </p>
+      <p>Total Adwords: <%= total_adword_urls(@search_results) %> </p>
+      <p>Total Non Adwords: <%= total_non_adword_urls(@search_results) %> </p>
+    </div>
+  </div>
+
+  <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-11/12 max-w-6xl bg-primary">
+    <input type="checkbox" /> 
+    <div class="collapse-title text-xl font-medium">
+      Top Adwords (<%= total_top_adword_urls(@search_results) %>)
+    </div>
+    <div class="collapse-content"> 
+      <%= if total_top_adword_urls(@search_results) > 0 do %>
+        <%= for search_result <- @search_results.top_adwords do %>
+          <p class="mb-5"><%= search_result.url %></p>
+        <% end %>
+      <% else %>
+        <p> - </p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-11/12 max-w-6xl bg-primary">
+    <input type="checkbox" /> 
+    <div class="collapse-title text-xl font-medium">
+      Adwords (<%= total_adword_urls(@search_results) %>)
+    </div>
+    <div class="collapse-content"> 
+      <%= if total_adword_urls(@search_results) > 0 do %>
+        <%= for search_result <- @search_results.adwords do %>
+          <p class="mb-5"><%= search_result.url %></p>
+        <% end %>
+      <% else %>
+        <p> - </p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-11/12 max-w-6xl bg-primary">
+    <input type="checkbox" /> 
+    <div class="collapse-title text-xl font-medium">
+      Non Adwords (<%= total_non_adword_urls(@search_results) %>)
+    </div>
+    <div class="collapse-content"> 
+      <%= if total_non_adword_urls(@search_results) > 0 do %>
+        <%= for search_result <- @search_results.non_adwords do %>
+          <p class="mb-5"><%= search_result.url %></p>
+        <% end %>
+      <% else %>
+        <p> - </p>
+      <% end %>
+    </div>
+  </div>
+</section>
