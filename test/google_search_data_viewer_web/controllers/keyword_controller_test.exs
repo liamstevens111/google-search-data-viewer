@@ -14,6 +14,35 @@ defmodule GoogleSearchDataViewerWeb.KeywordControllerTest do
     end
   end
 
+  describe "GET /keywords/:id" do
+    test "renders keyword url result page for an existing uploaded keyword", %{conn: conn} do
+      user = insert(:user)
+      keyword_upload = insert(:keyword_upload)
+
+      conn =
+        conn
+        |> init_test_session(user_id: user.id)
+        |> get(Routes.keyword_path(conn, :show, keyword_upload.id))
+
+      assert html_response(conn, 200) =~ keyword_upload.name
+    end
+
+    test "given a keyword upload with two total links in the url results, renders result page with two total links",
+         %{conn: conn} do
+      user = insert(:user)
+      keyword_upload = insert(:keyword_upload)
+
+      insert_list(2, :search_result_url, keyword_upload: keyword_upload)
+
+      conn =
+        conn
+        |> init_test_session(user_id: user.id)
+        |> get(Routes.keyword_path(conn, :show, keyword_upload.id))
+
+      assert html_response(conn, 200) =~ "Total links: 2"
+    end
+  end
+
   describe "POST /keywords/upload" do
     test "given a valid csv file extension, uploads the file", %{conn: conn} do
       file = %Plug.Upload{
