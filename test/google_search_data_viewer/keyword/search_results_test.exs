@@ -59,12 +59,7 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
     test "given SearchResultUrls with two URLs that are not adwords, returns a Map with two non_adwords with the key non_adwords" do
       keyword_upload = insert(:keyword_upload)
 
-      search_results =
-        insert_list(2, :search_result_url,
-          is_adword: false,
-          is_top_adword: false,
-          keyword_upload: keyword_upload
-        )
+      search_results = insert_list(2, :search_result_normal_url, keyword_upload: keyword_upload)
 
       result = SearchResults.group_by_adword_types(search_results)
 
@@ -77,9 +72,7 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
       keyword_upload = insert(:keyword_upload)
 
       search_results = [
-        insert(:search_result_url,
-          is_adword: true,
-          is_top_adword: false,
+        insert(:search_result_adword_url,
           keyword_upload: keyword_upload
         )
       ]
@@ -94,12 +87,7 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
     test "given SearchResultUrls with two URLs that are top_adwords, returns a Map with two top_adwords with the key top_adwords" do
       keyword_upload = insert(:keyword_upload)
 
-      search_results =
-        insert_list(2, :search_result_url,
-          is_adword: true,
-          is_top_adword: true,
-          keyword_upload: keyword_upload
-        )
+      search_results = insert_list(2, :search_result_top_adword_url, keyword_upload: keyword_upload)
 
       result = SearchResults.group_by_adword_types(search_results)
 
@@ -112,14 +100,10 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
       keyword_upload = insert(:keyword_upload)
 
       search_results = [
-        insert(:search_result_url,
-          is_adword: true,
-          is_top_adword: true,
+        insert(:search_result_top_adword_url,
           keyword_upload: keyword_upload
         ),
-        insert(:search_result_url,
-          is_adword: true,
-          is_top_adword: false,
+        insert(:search_result_adword_url,
           keyword_upload: keyword_upload
         )
       ]
@@ -135,17 +119,17 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
       keyword_upload = insert(:keyword_upload)
 
       search_results = [
-        insert(:search_result_url,
+        insert(:search_result_top_adword_url,
           is_adword: true,
           is_top_adword: true,
           keyword_upload: keyword_upload
         ),
-        insert(:search_result_url,
+        insert(:search_result_adword_url,
           is_adword: true,
           is_top_adword: false,
           keyword_upload: keyword_upload
         ),
-        insert(:search_result_url,
+        insert(:search_result_normal_url,
           is_adword: false,
           is_top_adword: false,
           keyword_upload: keyword_upload
