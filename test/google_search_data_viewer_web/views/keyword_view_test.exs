@@ -3,6 +3,18 @@ defmodule GoogleSearchDataViewerWeb.KeywordViewTest do
 
   alias GoogleSearchDataViewerWeb.KeywordView
 
+  describe "total_urls/1" do
+    test "given a list of search results containing three URLs, correctly returns the count" do
+      search_results = %{
+        top_adwords: [build(:search_result_top_adword_url)],
+        adwords: [build(:search_result_adword_url)],
+        non_adwords: [build(:search_result_normal_url)]
+      }
+
+      assert KeywordView.total_urls(search_results) == 3
+    end
+  end
+
   describe "format_date_time/1" do
     test "given a date and time, returns it in the format of d.m.y H:M:S" do
       {_, current_date_time} = NaiveDateTime.new(1970, 1, 1, 0, 0, 0)
