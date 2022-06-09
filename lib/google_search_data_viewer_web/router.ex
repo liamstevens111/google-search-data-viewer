@@ -39,8 +39,7 @@ defmodule GoogleSearchDataViewerWeb.Router do
   scope "/keywords", GoogleSearchDataViewerWeb do
     pipe_through [:browser, :authorized]
 
-    get "/", KeywordController, :index
-    get "/:id", KeywordController, :show
+    resources "/", KeywordController, only: [:index, :show]
 
     post "/upload", KeywordController, :upload
   end
