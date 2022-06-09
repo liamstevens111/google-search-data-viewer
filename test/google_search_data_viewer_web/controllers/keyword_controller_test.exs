@@ -32,7 +32,7 @@ defmodule GoogleSearchDataViewerWeb.KeywordControllerTest do
       user = insert(:user)
       keyword_upload = insert(:keyword_upload)
 
-      insert_list(2, :search_result_url, keyword_upload: keyword_upload)
+      insert_list(2, :search_result_normal_url, keyword_upload: keyword_upload)
 
       conn =
         conn
