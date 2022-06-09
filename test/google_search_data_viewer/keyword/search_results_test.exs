@@ -69,12 +69,16 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
 
       search_results = [
 <<<<<<< HEAD
+<<<<<<< HEAD
         insert(:search_result_adword_url,
 =======
         insert(:search_result_url,
           is_adword: true,
           is_top_adword: false,
 >>>>>>> 09a6412 ([#19] Change insert_all to insert for factory and explicitly add the single item to list)
+=======
+        insert(:search_result_adword_url,
+>>>>>>> 0d7cbe4 ([#19] Include multiple factory functions within the Search Result factory to allow the creation of different adword types)
           keyword_upload: keyword_upload
         )
       ]
