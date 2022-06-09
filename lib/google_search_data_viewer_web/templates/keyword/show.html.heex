@@ -13,19 +13,19 @@
     <div class="card-body items-center text-center">
       <h2 class="card-title">Summary</h2>
       <p>Total links: <%= total_urls(@search_results) %> </p>
-      <p>Total Top Adwords: <%= total_top_adword_urls(@search_results) %> </p>
-      <p>Total Adwords: <%= total_adword_urls(@search_results) %> </p>
-      <p>Total Non Adwords: <%= total_non_adword_urls(@search_results) %> </p>
+      <p>Total Top Adwords: <%= count_search_result(@search_results, :top_adwords) %> </p>
+      <p>Total Adwords: <%= count_search_result(@search_results, :adwords) %> </p>
+      <p>Total Non Adwords: <%= count_search_result(@search_results, :non_adwords) %> </p>
     </div>
   </div>
 
   <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-11/12 max-w-6xl bg-primary">
     <input type="checkbox" /> 
     <div class="collapse-title text-xl font-medium">
-      Top Adwords (<%= total_top_adword_urls(@search_results) %>)
+      Top Adwords (<%= count_search_result(@search_results, :top_adwords) %>)
     </div>
     <div class="collapse-content"> 
-      <%= if total_top_adword_urls(@search_results) > 0 do %>
+      <%= if count_search_result(@search_results, :top_adwords) > 0 do %>
         <%= for search_result <- @search_results.top_adwords do %>
           <p class="mb-5"><%= search_result.url %></p>
         <% end %>
@@ -38,10 +38,10 @@
   <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-11/12 max-w-6xl bg-primary">
     <input type="checkbox" /> 
     <div class="collapse-title text-xl font-medium">
-      Adwords (<%= total_adword_urls(@search_results) %>)
+      Adwords (<%= count_search_result(@search_results, :adwords) %>)
     </div>
     <div class="collapse-content"> 
-      <%= if total_adword_urls(@search_results) > 0 do %>
+      <%= if count_search_result(@search_results, :adwords) > 0 do %>
         <%= for search_result <- @search_results.adwords do %>
           <p class="mb-5"><%= search_result.url %></p>
         <% end %>
@@ -54,10 +54,10 @@
   <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-11/12 max-w-6xl bg-primary">
     <input type="checkbox" /> 
     <div class="collapse-title text-xl font-medium">
-      Non Adwords (<%= total_non_adword_urls(@search_results) %>)
+      Non Adwords (<%= count_search_result(@search_results, :non_adwords) %>)
     </div>
     <div class="collapse-content"> 
-      <%= if total_non_adword_urls(@search_results) > 0 do %>
+      <%= if count_search_result(@search_results, :non_adwords) > 0 do %>
         <%= for search_result <- @search_results.non_adwords do %>
           <p class="mb-5"><%= search_result.url %></p>
         <% end %>
