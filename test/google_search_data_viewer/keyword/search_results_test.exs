@@ -27,8 +27,6 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
 
       search_result_url = %{
         url: "",
-        is_top_adword: false,
-        is_adword: true,
         keyword_upload_id: keyword_upload.id
       }
 
@@ -42,8 +40,6 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
     test "given an invalid keyword upload, returns an error" do
       search_result_url = %{
         url: "www.google.com",
-        is_top_adword: false,
-        is_adword: true,
         keyword_upload_id: -1
       }
 
@@ -120,18 +116,12 @@ defmodule GoogleSearchDataViewer.Keyword.SearchResultsTest do
 
       search_results = [
         insert(:search_result_top_adword_url,
-          is_adword: true,
-          is_top_adword: true,
           keyword_upload: keyword_upload
         ),
         insert(:search_result_adword_url,
-          is_adword: true,
-          is_top_adword: false,
           keyword_upload: keyword_upload
         ),
         insert(:search_result_normal_url,
-          is_adword: false,
-          is_top_adword: false,
           keyword_upload: keyword_upload
         )
       ]
